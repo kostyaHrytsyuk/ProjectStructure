@@ -2,7 +2,7 @@
 
 namespace DAL.Models
 {
-    class Departures : Entity
+    class Departure : Entity
     {
         public string FlightNumber { get; set; }
 
