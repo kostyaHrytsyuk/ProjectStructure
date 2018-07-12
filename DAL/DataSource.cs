@@ -11,7 +11,7 @@ namespace DAL
 
         public List<Fligth> Fligths { get; set; }
 
-        public List<Ticket> Tickets { get; set; } 
+        public List<Ticket> Tickets { get; set; }
 
         public List<Crew> Crews { get; set; }
 
@@ -22,5 +22,19 @@ namespace DAL
         public List<Plane> Planes { get; set; }
 
         public List<PlaneType> PlaneTypes { get; set; }
+
+        public DataSource()
+        {
+            Data.Add(typeof(Departure), Departures);
+            Data.Add(typeof(Fligth), Fligths);
+            Data.Add(typeof(Ticket), Tickets);
+            Data.Add(typeof(Crew), Crews);
+            Data.Add(typeof(Pilot), Pilots);
+            Data.Add(typeof(Stewardess), Stewardesses);
+            Data.Add(typeof(Plane), Planes);
+            Data.Add(typeof(PlaneType), PlaneTypes);
+        }
+
+        public Dictionary<Type, IEnumerable<Entity>> Data { get; set; }
     }
 }
