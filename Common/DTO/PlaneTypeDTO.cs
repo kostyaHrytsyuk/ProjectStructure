@@ -1,6 +1,10 @@
-﻿namespace DAL.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Common.DTO
 {
-    public class PlaneType : Entity
+    public class PlaneTypeDto : BaseDto
     {
         public string PlaneModel { get; set; }
 

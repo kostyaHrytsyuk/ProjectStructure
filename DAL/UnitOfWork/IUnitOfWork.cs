@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DAL.Models;
+using DAL.Repositories;
 
 namespace DAL.UnitOfWork
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        IRepository<TEntity> Repository<TEntity>() where TEntity : Entity;
     }
 }

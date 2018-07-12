@@ -2,7 +2,7 @@
 
 namespace DAL.Models
 {
-    class Stewardess : Entity
+    public class Stewardess : Entity
     {
         public string Name { get; set; }
 

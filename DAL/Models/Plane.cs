@@ -2,7 +2,7 @@
 
 namespace DAL.Models
 {
-    class Plane : Entity
+    public class Plane : Entity
     {
         public string Name { get; set; }
 

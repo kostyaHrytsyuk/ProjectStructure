@@ -5,7 +5,7 @@ using DAL.Models;
 
 namespace DAL
 {
-    class DataSource
+    public class DataSource
     {
         public List<Departure> Departures { get; set; }
 
@@ -36,5 +36,10 @@ namespace DAL
         }
 
         public Dictionary<Type, IEnumerable<Entity>> Data { get; set; }
+
+        public IEnumerable<TEntity> SetOf<TEntity>() where TEntity : Entity
+        {
+            return Data[typeof(TEntity)] as IEnumerable<TEntity>;
+        }
     }
 }

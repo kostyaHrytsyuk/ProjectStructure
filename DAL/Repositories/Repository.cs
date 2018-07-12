@@ -43,9 +43,6 @@ namespace DAL.Repositories
             {
                 ((List<T>)_context.Data[typeof(T)]).Remove(deleteItem);
             }
-            {
-
-            }
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.Models
 {
-    class Fligth : Entity
+    public class Fligth : Entity
     {
         public string FlightNumber { get; set; }
 
