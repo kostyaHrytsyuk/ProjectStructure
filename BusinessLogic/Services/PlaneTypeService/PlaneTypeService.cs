@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
@@ -10,15 +11,17 @@ namespace BusinessLogic.Services.PlaneTypeService
     class PlaneTypeService : IPlaneTypeService, IService<PlaneTypeDto>
     {
         private IUnitOfWork _unitOfWork;
+        private IMapper _mapper;
 
-        public PlaneTypeService(IUnitOfWork unitOfWork)
+        public PlaneTypeService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public List<PlaneTypeDto> GetAll()
         {
-            //return _unitOfWork.Repository<PlaneType>().GetAll();
+            var planeTypes = _unitOfWork.Repository<PlaneType>().GetAll();
             return new List<PlaneTypeDto>();
         }
 
