@@ -6,9 +6,9 @@ using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
 
-namespace BusinessLogic.Services.PlaneTypeService
+namespace BusinessLogic.Services
 {
-    class PlaneTypeService : IPlaneTypeService, IService<PlaneTypeDto>
+    public class PlaneTypeService : IPlaneTypeService
     {
         private IUnitOfWork _unitOfWork;
         private IMapper _mapper;

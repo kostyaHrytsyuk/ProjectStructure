@@ -9,7 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using BusinessLogic.Services;
 using DAL.Models;
+using DAL.UnitOfWork;
+using DAL;
 using Common.DTO;
 
 namespace ProjectStructure
@@ -29,6 +32,9 @@ namespace ProjectStructure
             services.AddMvc();
 
             services.AddOptions();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IPlaneTypeService, PlaneTypeService>();
 
             var mapper = MapperConfiguration().CreateMapper();
             services.AddScoped(_ => mapper);
@@ -50,7 +56,6 @@ namespace ProjectStructure
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<PlaneType, PlaneTypeDto>();
-
                 cfg.CreateMap<Plane, PlaneDto>();
                 cfg.CreateMap<Stewardess, StewardessDto>();
                 cfg.CreateMap<Pilot, PilotDto>();

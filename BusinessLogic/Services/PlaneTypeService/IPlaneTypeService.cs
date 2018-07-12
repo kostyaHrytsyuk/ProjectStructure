@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.DTO;
 
-namespace BusinessLogic.Services.PlaneTypeService
+namespace BusinessLogic.Services
 {
-    interface IPlaneTypeService
+    public interface IPlaneTypeService : IService<PlaneTypeDto>
     {
     }
 }

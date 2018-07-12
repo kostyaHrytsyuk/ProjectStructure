@@ -5,8 +5,13 @@ using DAL.Models;
 
 namespace DAL
 {
+    
     public class DataSource
     {
+        private static readonly Lazy<DataSource> lazySource = new Lazy<DataSource>(() => new DataSource());
+
+        public static DataSource Source { get { return lazySource.Value; }  }
+
         public List<Departure> Departures { get; set; }
 
         public List<Fligth> Fligths { get; set; }

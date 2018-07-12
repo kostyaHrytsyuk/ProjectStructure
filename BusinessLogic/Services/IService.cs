@@ -6,7 +6,7 @@ using Common.DTO;
 
 namespace BusinessLogic.Services
 {
-    interface IService<T> where T : BaseDto
+    public interface IService<T> where T : BaseDto
     {
         List<T> GetAll();
         T Get(int id);
