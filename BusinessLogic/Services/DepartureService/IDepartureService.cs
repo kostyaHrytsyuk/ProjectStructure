@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Common.DTO;
 
-namespace BusinessLogic.Services.DepartureService
+namespace BusinessLogic.Services
 {
-    interface IDepartureService
+    public interface IDepartureService : IService<DepartureDto>
     {
     }
 }

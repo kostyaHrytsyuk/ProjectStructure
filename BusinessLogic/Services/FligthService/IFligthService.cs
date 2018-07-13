@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BusinessLogic.Services.FligthService
+﻿using Common.DTO;
+namespace BusinessLogic.Services
 {
-    interface IFligthService
+    public interface IFligthService : IService<FligthDto>
     {
     }
 }

@@ -40,7 +40,8 @@ namespace ProjectStructure
             services.AddTransient<IPilotService, PilotService>();
             services.AddTransient<ICrewService, CrewService>();
             services.AddTransient<ITicketService, TicketService>();
-
+            services.AddTransient<IFligthService, FligthService>();
+            services.AddTransient<IDepartureService, DepartureService>();
 
 
             var mapper = MapperConfiguration().CreateMapper();

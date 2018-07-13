@@ -2,7 +2,7 @@
 
 namespace Common.DTO
 {
-    public class DepartureDto
+    public class DepartureDto : BaseDto
     {
         public string FlightNumber { get; set; }
 
