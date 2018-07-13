@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using BusinessLogic.Services;
+using DAL.Models;
+using DAL.UnitOfWork;
+using DAL;
+using Common.DTO;
 
 namespace ProjectStructure
 {
@@ -24,6 +30,23 @@ namespace ProjectStructure
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddOptions();
+
+            services.AddSingleton<DataSource>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IPlaneTypeService, PlaneTypeService>();
+            services.AddTransient<IPlaneService, PlaneService>();
+            services.AddTransient<IStewardessService, StewardessService>();
+            services.AddTransient<IPilotService, PilotService>();
+            services.AddTransient<ICrewService, CrewService>();
+            services.AddTransient<ITicketService, TicketService>();
+            services.AddTransient<IFlightService, FlightService>();
+            services.AddTransient<IDepartureService, DepartureService>();
+
+
+            var mapper = MapperConfiguration().CreateMapper();
+            services.AddScoped(_ => mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +58,38 @@ namespace ProjectStructure
             }
 
             app.UseMvc();
+        }
+
+        public MapperConfiguration MapperConfiguration()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<PlaneType, PlaneTypeDto>();
+                cfg.CreateMap<PlaneTypeDto, PlaneType>();
+
+                cfg.CreateMap<Plane, PlaneDto>();
+                cfg.CreateMap<PlaneDto, Plane>();
+
+                cfg.CreateMap<Stewardess, StewardessDto>();
+                cfg.CreateMap<StewardessDto, Stewardess>();
+
+                cfg.CreateMap<Pilot, PilotDto>();
+                cfg.CreateMap<PilotDto, Pilot>();
+
+                cfg.CreateMap<Crew, CrewDto>();
+                cfg.CreateMap<CrewDto, Crew>();
+
+                cfg.CreateMap<Ticket, TicketDto>();
+                cfg.CreateMap<TicketDto, Ticket>();
+
+                cfg.CreateMap<Flight, FlightDto>();
+                cfg.CreateMap<FlightDto, Flight>();
+
+                cfg.CreateMap<Departure, DepartureDto>();
+                cfg.CreateMap<DepartureDto, Departure>();
+            });
+
+            return config;
         }
     }
 }
