@@ -33,6 +33,7 @@ namespace ProjectStructure
 
             services.AddOptions();
 
+            services.AddSingleton<DataSource>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPlaneTypeService, PlaneTypeService>();
             services.AddTransient<IPlaneService, PlaneService>();

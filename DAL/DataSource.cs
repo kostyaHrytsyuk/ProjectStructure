@@ -5,13 +5,9 @@ using DAL.Models;
 
 namespace DAL
 {
-    
+
     public class DataSource
     {
-        private static readonly Lazy<DataSource> lazySource = new Lazy<DataSource>(() => new DataSource());
-
-        public static DataSource Source { get { return lazySource.Value; }  }
-
         public List<Departure> Departures { get; set; }
 
         public List<Flight> Flights { get; set; }
@@ -24,27 +20,44 @@ namespace DAL
 
         public List<Stewardess> Stewardesses { get; set; }
 
-        public List<Plane> Planes { get; set; }
+        private List<Plane> planes;
 
-        public List<PlaneType> PlaneTypes { get; set; }
+        private List<PlaneType> planeTypes;
 
         public DataSource()
         {
+            planeTypes = new List<PlaneType>()
+            {
+                new PlaneType() { Id = 1, PlaneModel = "Civil", SeatsNumber = 200, Carrying = 10000 },
+                new PlaneType() { Id = 2, PlaneModel = "Cargo", SeatsNumber = 10, Carrying = 50000 },
+                new PlaneType() { Id = 3, PlaneModel = "Military", SeatsNumber = 40, Carrying = 3000},
+                new PlaneType() { Id = 4, PlaneModel = "Falcon", SeatsNumber = 100, Carrying = 9}
+            };
+
+            planes = new List<Plane>()
+            {
+                new Plane(1, "Dream", planeTypes.Find(pt => pt.PlaneModel == "Cargo"), new DateTime(1995, 11, 4)),
+                new Plane(2, "Boeing", planeTypes.Find(pt => pt.PlaneModel == "Civil"), new DateTime(2011, 6, 15)),
+                new Plane(3, "Heavy", planeTypes.Find(pt => pt.PlaneModel == "Civil"), new DateTime(2018, 2, 6))
+            };
+
+            Data = new Dictionary<Type, IEnumerable<Entity>>();
             Data.Add(typeof(Departure), Departures);
             Data.Add(typeof(Flight), Flights);
             Data.Add(typeof(Ticket), Tickets);
             Data.Add(typeof(Crew), Crews);
             Data.Add(typeof(Pilot), Pilots);
             Data.Add(typeof(Stewardess), Stewardesses);
-            Data.Add(typeof(Plane), Planes);
-            Data.Add(typeof(PlaneType), PlaneTypes);
+            Data.Add(typeof(Plane), planes);
+            Data.Add(typeof(PlaneType), planeTypes);
         }
 
-        public Dictionary<Type, IEnumerable<Entity>> Data { get; set; }
+        private Dictionary<Type, IEnumerable<Entity>> Data;
 
         public IEnumerable<TEntity> SetOf<TEntity>() where TEntity : Entity
         {
-            return Data[typeof(TEntity)] as IEnumerable<TEntity>;
+            var r = Data[typeof(TEntity)];
+            return r as IEnumerable<TEntity>;
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DAL.Models;
 
 namespace DAL.Repositories
@@ -17,23 +15,23 @@ namespace DAL.Repositories
             
         public List<T> GetAll()
         {
-            return (List<T>)_context.Data[typeof(T)];
+            return (List<T>)_context.SetOf<T>();
         }
 
         public T Get(int id)
         {
-            return (T)_context.Data[typeof(T)].Where(e => e.Id == id).FirstOrDefault();
+            return _context.SetOf<T>().Where(e => e.Id == id).FirstOrDefault();
         }
 
         public void Create(T item)
         {
-            ((List<T>)_context.Data[typeof(T)]).Add(item);
+            ((List<T>)_context.SetOf<T>()).Add(item);
         }
 
         public void Update(T item)
-        {
-            var updItem = Get(item.Id);
-            updItem = item;
+        {            
+            var updItemIndex = _context.SetOf<T>().ToList().IndexOf(Get(item.Id));
+            ((List<T>)_context.SetOf<T>())[updItemIndex] = item;
         }
 
         public void Delete(int id)
@@ -41,15 +39,10 @@ namespace DAL.Repositories
             var deleteItem = Get(id);
             if (deleteItem != null)
             {
-                ((List<T>)_context.Data[typeof(T)]).Remove(deleteItem);
+                ((List<T>)_context.SetOf<T>()).Remove(deleteItem);
             }
         }
     }
 }
-    //List<T> GetAll();
-    //T Get(int id);
-    //void Create(T item);
-    //void Update(T item);
-    //void Delete(int id);
 
 

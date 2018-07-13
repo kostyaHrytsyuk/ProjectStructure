@@ -24,7 +24,7 @@ namespace ProjectStructure.Controllers
         }
 
         //GET: api/planes/:id
-        [HttpGet("{id})")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             return Json(_service.Get(id));
@@ -39,7 +39,7 @@ namespace ProjectStructure.Controllers
         }
 
         //PUT: api/plane/:id
-        [HttpPut("{id})")]
+        [HttpPut("{id}")]
         public IActionResult Update([FromBody] PlaneDto plane)
         {
             _service.Update(plane);

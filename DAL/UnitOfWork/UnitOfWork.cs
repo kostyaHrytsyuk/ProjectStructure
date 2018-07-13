@@ -23,9 +23,9 @@ namespace DAL.UnitOfWork
             return newRepository;
         }
         
-        public UnitOfWork()
+        public UnitOfWork(DataSource context)
         {
-            _context = DataSource.Source;
+            _context = context;
         }
     }
 }

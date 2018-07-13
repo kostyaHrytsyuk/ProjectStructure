@@ -6,7 +6,7 @@ using Common.DTO;
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
-    [Route("api/planeTypes")]
+    [Route("api/planeTypes/")]
     public class PlaneTypeController : Controller
     {
         private IPlaneTypeService _service;
@@ -17,14 +17,15 @@ namespace ProjectStructure.Controllers
         }
 
         //GET: api/planeTypes/
+        [HttpGet]
         public IActionResult GetAll()
         {
             return Json(_service.GetAll());
         }
 
-        //GET: api/planeTypes/:id
-        [HttpGet("{id})")]
-        public IActionResult GetById(int id)
+        //GET: api/planeTypes/id
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
         {
             return Json(_service.Get(id));
         }
@@ -38,10 +39,10 @@ namespace ProjectStructure.Controllers
         }
 
         //PUT: api/planeTypes/
-        [HttpPut("{id})")]
+        [HttpPut("{id}")]
         public IActionResult Update([FromBody] PlaneTypeDto planeType)
         {
-            _service.Create(planeType);
+            _service.Update(planeType);
             return Ok();
         }
 

@@ -23,7 +23,7 @@ namespace ProjectStructure.Controllers
         }
 
         //GET: api/stewardesses/:id
-        [HttpGet("{id})")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             return Json(_service.Get(id));
@@ -38,7 +38,7 @@ namespace ProjectStructure.Controllers
         }
 
         //PUT: api/stewardesses/:id
-        [HttpPut("{id})")]
+        [HttpPut("{id}")]
         public IActionResult Update([FromBody] StewardessDto stewardess)
         {
             _service.Update(stewardess);
