@@ -5,47 +5,47 @@ using Common.DTO;
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
-    [Route("api/tickets")]
-    public class TicketController : Controller
+    [Route("api/pilots")]
+    public class PilotController : Controller
     {
-        private ITicketService _service;
+        private IPilotService _service;
 
-        public TicketController(ITicketService service)
+        public PilotController(IPilotService service)
         {
             _service = service;
         }
 
-        //GET: api/tickets/
+        //GET: api/pilots/
         [HttpGet]
         public IActionResult GetAll()
         {
             return Json(_service.GetAll());
         }
 
-        //GET: api/tickets/:id
+        //GET: api/pilots/:id
         [HttpGet("{id})")]
         public IActionResult GetById(int id)
         {
             return Json(_service.Get(id));
         }
 
-        //POST: api/tickets/
+        //POST: api/pilots/
         [HttpPost]
-        public IActionResult Create([FromBody] TicketDto ticket)
+        public IActionResult Create([FromBody] PilotDto pilot)
         {
-            _service.Create(ticket);
+            _service.Create(pilot);
             return Ok();
         }
 
-        //PUT: api/tickets/:id
+        //PUT: api/pilots/:id
         [HttpPut("{id})")]
-        public IActionResult Update([FromBody] TicketDto ticket)
+        public IActionResult Update([FromBody] PilotDto pilot)
         {
-            _service.Update(ticket);
+            _service.Update(pilot);
             return Ok();
         }
 
-        //DELETE: api/tickets/:id
+        //DELETE: api/pilots/:id
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

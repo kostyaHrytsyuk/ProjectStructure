@@ -5,47 +5,47 @@ using Common.DTO;
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
-    [Route("api/tickets")]
-    public class TicketController : Controller
+    [Route("api/fligths")]
+    public class FligthController : Controller
     {
-        private ITicketService _service;
+        private IFligthService _service;
 
-        public TicketController(ITicketService service)
+        public FligthController(IFligthService service)
         {
             _service = service;
         }
 
-        //GET: api/tickets/
+        //GET: api/fligths/
         [HttpGet]
         public IActionResult GetAll()
         {
             return Json(_service.GetAll());
         }
 
-        //GET: api/tickets/:id
+        //GET: api/fligths/:id
         [HttpGet("{id})")]
         public IActionResult GetById(int id)
         {
             return Json(_service.Get(id));
         }
 
-        //POST: api/tickets/
+        //POST: api/fligths/
         [HttpPost]
-        public IActionResult Create([FromBody] TicketDto ticket)
+        public IActionResult Create([FromBody] FligthDto flight)
         {
-            _service.Create(ticket);
+            _service.Create(flight);
             return Ok();
         }
 
-        //PUT: api/tickets/:id
+        //PUT: api/fligths/:id
         [HttpPut("{id})")]
-        public IActionResult Update([FromBody] TicketDto ticket)
+        public IActionResult Update([FromBody] FligthDto flight)
         {
-            _service.Update(ticket);
+            _service.Update(flight);
             return Ok();
         }
 
-        //DELETE: api/tickets/:id
+        //DELETE: api/fligths/:id
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
