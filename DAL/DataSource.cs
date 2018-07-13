@@ -13,7 +13,7 @@ namespace DAL
 
         public List<Ticket> Tickets { get; set; }
 
-        public List<Crew> Crews { get; set; }
+        private readonly List<Crew> crews;
 
         private readonly List<Pilot> pilots;
 
@@ -63,19 +63,25 @@ namespace DAL
             };
             #endregion
 
+            #region Crews
+            crews = new List<Crew>()
+            {
+                new Crew(){ Id = 1, PilotId = 2, Stewardesses = new List<int>() { 2, 4} },
+                new Crew(){ Id = 2, PilotId = 3, Stewardesses = new List<int>() { 3 } },
+                new Crew(){ Id = 3, PilotId = 1, Stewardesses = new List<int>() { 1} }
+            };
+            #endregion
 
             Data = new Dictionary<Type, IEnumerable<Entity>>();
             Data.Add(typeof(Departure), Departures);
             Data.Add(typeof(Flight), Flights);
             Data.Add(typeof(Ticket), Tickets);
-            Data.Add(typeof(Crew), Crews);
             
-
             Data.Add(typeof(PlaneType), planeTypes);
             Data.Add(typeof(Plane), planes);
             Data.Add(typeof(Stewardess), stewardesses);
             Data.Add(typeof(Pilot), pilots);
-
+            Data.Add(typeof(Crew), crews);
 
         }
 
