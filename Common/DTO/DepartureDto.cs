@@ -8,8 +8,8 @@ namespace Common.DTO
 
         public DateTime DepartureDate { get; set; }
 
-        public CrewDto Crew { get; set; }
+        public int CrewId { get; set; }
 
-        public PlaneDto Plane { get; set; }
+        public int PlaneID { get; set; }
     }
 }

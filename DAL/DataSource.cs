@@ -6,7 +6,7 @@ namespace DAL
 {
     public class DataSource
     {
-        public List<Departure> Departures { get; set; }
+        private readonly List<Departure> departures;
 
         private readonly List<Flight> flights;
 
@@ -91,10 +91,16 @@ namespace DAL
             };
             #endregion
 
+            #region Departures
+            departures = new List<Departure>()
+            {
+                new Departure(){ Id = 1, FlightNumber = "7W7017", DepartureDate = new DateTime(2018 , 7, 13, 22, 15, 0), CrewId = 1, PlaneId = 2},
+                new Departure(){ Id = 2, FlightNumber = "AZ4297", DepartureDate = new DateTime(2018, 9, 15, 19, 45, 0), CrewId = 3, PlaneId = 1}
+             };
+            #endregion
+
             Data = new Dictionary<Type, IEnumerable<Entity>>();
-            Data.Add(typeof(Departure), Departures);
-            
-            
+                                   
             Data.Add(typeof(PlaneType), planeTypes);
             Data.Add(typeof(Plane), planes);
             Data.Add(typeof(Stewardess), stewardesses);
@@ -102,7 +108,7 @@ namespace DAL
             Data.Add(typeof(Crew), crews);
             Data.Add(typeof(Ticket), tickets);
             Data.Add(typeof(Flight), flights);
-
+            Data.Add(typeof(Departure), departures);
         }
 
         private Dictionary<Type, IEnumerable<Entity>> Data;
