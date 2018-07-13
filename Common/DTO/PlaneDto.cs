@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Common.DTO
 {
     public class PlaneDto : BaseDto
