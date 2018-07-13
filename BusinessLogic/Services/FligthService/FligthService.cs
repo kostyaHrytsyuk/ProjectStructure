@@ -6,44 +6,44 @@ using Common.DTO;
 
 namespace BusinessLogic.Services
 {
-    public class FligthService : IFligthService
+    public class FlightService : IFlightService
     {
         private IUnitOfWork _unitOfWork;
         private IMapper _mapper;
 
-        public FligthService(IUnitOfWork unitOfWork, IMapper mapper)
+        public FlightService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public List<FligthDto> GetAll()
+        public List<FlightDto> GetAll()
         {
-            var items = _unitOfWork.Repository<Fligth>().GetAll();
-            return this._mapper.Map<List<Fligth>, List<FligthDto>>(items);
+            var items = _unitOfWork.Repository<Flight>().GetAll();
+            return this._mapper.Map<List<Flight>, List<FlightDto>>(items);
         }
 
-        public FligthDto Get(int id)
+        public FlightDto Get(int id)
         {
-            var item = _unitOfWork.Repository<Fligth>().Get(id);
-            return this._mapper.Map<Fligth, FligthDto>(item);
+            var item = _unitOfWork.Repository<Flight>().Get(id);
+            return this._mapper.Map<Flight, FlightDto>(item);
         }
 
-        public void Create(FligthDto item)
+        public void Create(FlightDto item)
         {
-            var newItem = this._mapper.Map<FligthDto, Fligth>(item);
-            _unitOfWork.Repository<Fligth>().Create(newItem);
+            var newItem = this._mapper.Map<FlightDto, Flight>(item);
+            _unitOfWork.Repository<Flight>().Create(newItem);
         }
 
-        public void Update(FligthDto item)
+        public void Update(FlightDto item)
         {
-            var updItem = this._mapper.Map<FligthDto, Fligth>(item);
-            _unitOfWork.Repository<Fligth>().Update(updItem);
+            var updItem = this._mapper.Map<FlightDto, Flight>(item);
+            _unitOfWork.Repository<Flight>().Update(updItem);
         }
 
         public void Delete(int id)
         {
-            _unitOfWork.Repository<Fligth>().Delete(id);
+            _unitOfWork.Repository<Flight>().Delete(id);
         }
     }
 }

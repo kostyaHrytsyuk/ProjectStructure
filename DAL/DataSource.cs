@@ -14,7 +14,7 @@ namespace DAL
 
         public List<Departure> Departures { get; set; }
 
-        public List<Fligth> Fligths { get; set; }
+        public List<Flight> Flights { get; set; }
 
         public List<Ticket> Tickets { get; set; }
 
@@ -31,7 +31,7 @@ namespace DAL
         public DataSource()
         {
             Data.Add(typeof(Departure), Departures);
-            Data.Add(typeof(Fligth), Fligths);
+            Data.Add(typeof(Flight), Flights);
             Data.Add(typeof(Ticket), Tickets);
             Data.Add(typeof(Crew), Crews);
             Data.Add(typeof(Pilot), Pilots);

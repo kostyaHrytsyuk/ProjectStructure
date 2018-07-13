@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Common.DTO
+namespace DAL.Models
 {
-    public class FligthDto : BaseDto
+    public class Flight : Entity
     {
         public string FlightNumber { get; set; }
 
@@ -15,6 +15,6 @@ namespace Common.DTO
 
         public DateTime ArrivalTime { get; set; }
 
-        public List<TicketDto> Tickets { get; set; }
+        public List<Ticket> Tickets { get; set; }
     }
 }

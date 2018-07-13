@@ -40,7 +40,7 @@ namespace ProjectStructure
             services.AddTransient<IPilotService, PilotService>();
             services.AddTransient<ICrewService, CrewService>();
             services.AddTransient<ITicketService, TicketService>();
-            services.AddTransient<IFligthService, FligthService>();
+            services.AddTransient<IFlightService, FlightService>();
             services.AddTransient<IDepartureService, DepartureService>();
 
 
@@ -81,8 +81,8 @@ namespace ProjectStructure
                 cfg.CreateMap<Ticket, TicketDto>();
                 cfg.CreateMap<TicketDto, Ticket>();
 
-                cfg.CreateMap<Fligth, FligthDto>();
-                cfg.CreateMap<FligthDto, Fligth>();
+                cfg.CreateMap<Flight, FlightDto>();
+                cfg.CreateMap<FlightDto, Flight>();
 
                 cfg.CreateMap<Departure, DepartureDto>();
                 cfg.CreateMap<DepartureDto, Departure>();

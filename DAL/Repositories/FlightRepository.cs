@@ -3,7 +3,7 @@ using DAL.Models;
 
 namespace DAL.Repositories
 {
-    class FlightRepository : IRepository<Fligth>
+    class FlightRepository : IRepository<Flight>
     {
         private DataSource _context;
 
@@ -12,22 +12,22 @@ namespace DAL.Repositories
             _context = context;
         }
 
-        public List<Fligth> GetAll()
+        public List<Flight> GetAll()
         {
-            return _context.Fligths;
+            return _context.Flights;
         }
 
-        public Fligth Get(int id)
+        public Flight Get(int id)
         {
-            return _context.Fligths.Find(f => f.Id == id);
+            return _context.Flights.Find(f => f.Id == id);
         }
 
-        public void Create(Fligth item)
+        public void Create(Flight item)
         {
-            _context.Fligths.Add(item);
+            _context.Flights.Add(item);
         }
 
-        public void Update(Fligth item)
+        public void Update(Flight item)
         {
             var updItem = Get(item.Id);
             updItem = item;
@@ -38,7 +38,7 @@ namespace DAL.Repositories
             var deleteItem = Get(id);
             if (deleteItem != null)
             {
-                _context.Fligths.Remove(deleteItem);
+                _context.Flights.Remove(deleteItem);
             }
         }
     }
