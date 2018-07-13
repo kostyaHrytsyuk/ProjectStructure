@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DAL.Models;
-using System.Text;
 
 namespace DAL.Repositories
 {

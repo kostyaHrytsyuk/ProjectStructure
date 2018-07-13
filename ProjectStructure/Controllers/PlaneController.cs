@@ -2,7 +2,6 @@
 using BusinessLogic.Services;
 using Common.DTO;
 
-
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]

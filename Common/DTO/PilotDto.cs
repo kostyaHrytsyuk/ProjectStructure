@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Common.DTO
 {
     public class PilotDto : BaseDto

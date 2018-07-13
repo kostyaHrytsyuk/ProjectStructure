@@ -1,5 +1,4 @@
-﻿
-namespace Common.DTO
+﻿namespace Common.DTO
 {
     public class TicketDto : BaseDto
     {

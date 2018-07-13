@@ -99,24 +99,24 @@ namespace DAL
              };
             #endregion
 
-            Data = new Dictionary<Type, IEnumerable<Entity>>();
-                                   
-            Data.Add(typeof(PlaneType), planeTypes);
-            Data.Add(typeof(Plane), planes);
-            Data.Add(typeof(Stewardess), stewardesses);
-            Data.Add(typeof(Pilot), pilots);
-            Data.Add(typeof(Crew), crews);
-            Data.Add(typeof(Ticket), tickets);
-            Data.Add(typeof(Flight), flights);
-            Data.Add(typeof(Departure), departures);
+            Data = new Dictionary<Type, IEnumerable<Entity>>
+            {
+                { typeof(PlaneType), planeTypes },
+                { typeof(Plane), planes },
+                { typeof(Stewardess), stewardesses },
+                { typeof(Pilot), pilots },
+                { typeof(Crew), crews },
+                { typeof(Ticket), tickets },
+                { typeof(Flight), flights },
+                { typeof(Departure), departures }
+            };
         }
 
         private Dictionary<Type, IEnumerable<Entity>> Data;
 
         public IEnumerable<TEntity> SetOf<TEntity>() where TEntity : Entity
         {
-            var r = Data[typeof(TEntity)];
-            return r as IEnumerable<TEntity>;
+            return Data[typeof(TEntity)] as IEnumerable<TEntity>;
         }
     }
 }
