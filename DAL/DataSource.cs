@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using DAL.Models;
 
 namespace DAL
@@ -20,9 +19,9 @@ namespace DAL
 
         public List<Stewardess> Stewardesses { get; set; }
 
-        private List<Plane> planes;
+        private readonly List<Plane> planes;
 
-        private List<PlaneType> planeTypes;
+        private readonly List<PlaneType> planeTypes;
 
         public DataSource()
         {
@@ -36,9 +35,9 @@ namespace DAL
 
             planes = new List<Plane>()
             {
-                new Plane(1, "Dream", planeTypes.Find(pt => pt.PlaneModel == "Cargo"), new DateTime(1995, 11, 4)),
-                new Plane(2, "Boeing", planeTypes.Find(pt => pt.PlaneModel == "Civil"), new DateTime(2011, 6, 15)),
-                new Plane(3, "Heavy", planeTypes.Find(pt => pt.PlaneModel == "Civil"), new DateTime(2018, 2, 6))
+                new Plane(1, "Dream", 2, new DateTime(1995, 11, 4)),
+                new Plane(2, "Boeing", 1, new DateTime(2011, 6, 15)),
+                new Plane(3, "Heavy", 4, new DateTime(2018, 2, 6))
             };
 
             Data = new Dictionary<Type, IEnumerable<Entity>>();
@@ -48,8 +47,10 @@ namespace DAL
             Data.Add(typeof(Crew), Crews);
             Data.Add(typeof(Pilot), Pilots);
             Data.Add(typeof(Stewardess), Stewardesses);
-            Data.Add(typeof(Plane), planes);
+
             Data.Add(typeof(PlaneType), planeTypes);
+            Data.Add(typeof(Plane), planes);
+
         }
 
         private Dictionary<Type, IEnumerable<Entity>> Data;
