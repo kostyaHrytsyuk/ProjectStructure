@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
@@ -21,26 +19,28 @@ namespace BusinessLogic.Services
 
         public List<PlaneTypeDto> GetAll()
         {
-            var planeTypes = _unitOfWork.Repository<PlaneType>().GetAll();
-            return new List<PlaneTypeDto>();
+            var items = _unitOfWork.Repository<PlaneType>().GetAll();
+            return this._mapper.Map<List<PlaneType>, List<PlaneTypeDto>>(items);
         }
 
         public PlaneTypeDto Get(int id)
         {
-            //return _unitOfWork.Repository<PlaneType>().Get(id);
-            return new PlaneTypeDto();
+            var item = _unitOfWork.Repository<PlaneType>().Get(id);
+            return this._mapper.Map<PlaneType, PlaneTypeDto>(item);
         }
 
         public void Create(PlaneTypeDto item)
         {
-            //_unitOfWork.Repository<PlaneType>().Create(item);
+            var newItem = this._mapper.Map<PlaneTypeDto, PlaneType>(item);
+            _unitOfWork.Repository<PlaneType>().Create(newItem);
         }
 
         public void Update(PlaneTypeDto item)
         {
-            //_unitOfWork.Repository<PlaneType>().Update(item);
+            var updItem = this._mapper.Map<PlaneTypeDto, PlaneType>(item);
+            _unitOfWork.Repository<PlaneType>().Update(updItem);
         }
-        
+
         public void Delete(int id)
         {
             _unitOfWork.Repository<PlaneType>().Delete(id);

@@ -27,19 +27,5 @@ namespace DAL.UnitOfWork
         {
             _context = DataSource.Source;
         }
-
-        //#region Repositories
-        //public IRepository<PlaneType> PlaneTypeRepository => new PlaneTypeRepository(_context);
-        //public IRepository<Plane> PlaneRepository => new PlaneRepository(_context);
-        //public IRepository<Stewardess> StewardessRepository => new StewardessRepository(_context);
-        //public IRepository<Pilot> PilotRepository => new PilotRepository(_context);
-        //public IRepository<Crew> CrewRepository => new CrewRepository(_context);
-        //public IRepository<Ticket> TicketRepository => new TicketRepository(_context);
-        //public IRepository<Fligth> FligthRepository => new FlightRepository(_context);
-        //public IRepository<Departure> DepartureRepository => new DepartureRepository(_context);
-        //#endregion
-
-
-
     }
 }

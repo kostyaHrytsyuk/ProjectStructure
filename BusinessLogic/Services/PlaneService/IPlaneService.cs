@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Common.DTO;
 
-namespace BusinessLogic.Services.PlaneService
+namespace BusinessLogic.Services
 {
-    interface IPlaneService
+    public interface IPlaneService : IService<PlaneDto>
     {
     }
 }

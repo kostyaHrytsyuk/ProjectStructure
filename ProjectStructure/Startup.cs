@@ -35,6 +35,10 @@ namespace ProjectStructure
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPlaneTypeService, PlaneTypeService>();
+            services.AddTransient<IPlaneService, PlaneService>();
+            services.AddTransient<IStewardessService, StewardessService>();
+
+
 
             var mapper = MapperConfiguration().CreateMapper();
             services.AddScoped(_ => mapper);
@@ -56,13 +60,28 @@ namespace ProjectStructure
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<PlaneType, PlaneTypeDto>();
+                cfg.CreateMap<PlaneTypeDto, PlaneType>();
+
                 cfg.CreateMap<Plane, PlaneDto>();
+                cfg.CreateMap<PlaneDto, Plane>();
+
                 cfg.CreateMap<Stewardess, StewardessDto>();
+                cfg.CreateMap<StewardessDto, Stewardess>();
+
                 cfg.CreateMap<Pilot, PilotDto>();
+                cfg.CreateMap<PilotDto, Pilot>();
+
                 cfg.CreateMap<Crew, CrewDto>();
+                cfg.CreateMap<CrewDto, Crew>();
+
                 cfg.CreateMap<Ticket, TicketDto>();
+                cfg.CreateMap<TicketDto, Ticket>();
+
                 cfg.CreateMap<Fligth, FligthDto>();
+                cfg.CreateMap<FligthDto, Fligth>();
+
                 cfg.CreateMap<Departure, DepartureDto>();
+                cfg.CreateMap<DepartureDto, Departure>();
             });
 
             return config;
