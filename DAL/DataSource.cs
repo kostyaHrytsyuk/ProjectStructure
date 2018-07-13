@@ -4,12 +4,11 @@ using DAL.Models;
 
 namespace DAL
 {
-
     public class DataSource
     {
         public List<Departure> Departures { get; set; }
 
-        public List<Flight> Flights { get; set; }
+        private readonly List<Flight> flights;
 
         private readonly List<Ticket> tickets;
 
@@ -77,16 +76,24 @@ namespace DAL
             {
                 new Ticket() {Id = 1, FlightNumber = "KP5311", Price = 250},
                 new Ticket() {Id = 2, FlightNumber = "7W7017", Price = 240},
-                new Ticket() {Id = 3, FlightNumber = "PS5673", Price = 300},
-                new Ticket() {Id = 4, FlightNumber = "QU4413", Price = 270},
+                new Ticket() {Id = 3, FlightNumber = "KP5311", Price = 300},
+                new Ticket() {Id = 4, FlightNumber = "7W7017", Price = 270},
                 new Ticket() {Id = 5, FlightNumber = "AZ4297", Price = 280}
+            };
+            #endregion
+
+            #region Flights
+            flights = new List<Flight>()
+            {
+                new Flight(){ Id = 1, FlightNumber = "7W7017", DepartureAirport = "LWO", DepartureTime = new DateTime(2018 , 7, 13, 22, 15, 0), DestinationAirport = "FCO", ArrivalTime = new DateTime(2018, 7, 13, 23, 45, 0), Tickets = new List<int>(){ 2, 5 } },
+                new Flight(){ Id = 2, FlightNumber = "KP5311", DepartureAirport = "KBP", DepartureTime = new DateTime(2018, 7, 15, 14, 30, 0), DestinationAirport = "EIN", ArrivalTime = new DateTime(2018, 7, 15, 17, 45, 0), Tickets = new List<int>(){ 1, 4} },
+                new Flight(){ Id = 3, FlightNumber = "AZ4297", DepartureAirport = "ODS", DepartureTime = new DateTime(2018, 9, 15, 19, 45, 0), DestinationAirport = "LIS", ArrivalTime = new DateTime(2018, 9, 15, 22, 30, 0), Tickets = new List<int>(){ 3} }
             };
             #endregion
 
             Data = new Dictionary<Type, IEnumerable<Entity>>();
             Data.Add(typeof(Departure), Departures);
-            Data.Add(typeof(Flight), Flights);
-
+            
             
             Data.Add(typeof(PlaneType), planeTypes);
             Data.Add(typeof(Plane), planes);
@@ -94,7 +101,7 @@ namespace DAL
             Data.Add(typeof(Pilot), pilots);
             Data.Add(typeof(Crew), crews);
             Data.Add(typeof(Ticket), tickets);
-
+            Data.Add(typeof(Flight), flights);
 
         }
 

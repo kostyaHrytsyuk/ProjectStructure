@@ -15,6 +15,6 @@ namespace Common.DTO
 
         public DateTime ArrivalTime { get; set; }
 
-        public List<TicketDto> Tickets { get; set; }
+        public List<int> Tickets { get; set; }
     }
 }
