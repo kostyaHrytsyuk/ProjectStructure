@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Common.DTO;
 
-namespace BusinessLogic.Services.CrewService
+namespace BusinessLogic.Services
 {
-    interface ICrewService
+    public interface ICrewService : IService<CrewDto>
     {
     }
 }

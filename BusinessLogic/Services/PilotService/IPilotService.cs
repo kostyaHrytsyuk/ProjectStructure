@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Common.DTO;
 
-namespace BusinessLogic.Services.PilotService
+namespace BusinessLogic.Services
 {
-    interface IPilotService
+    public interface IPilotService : IService<PilotDto>
     {
     }
 }

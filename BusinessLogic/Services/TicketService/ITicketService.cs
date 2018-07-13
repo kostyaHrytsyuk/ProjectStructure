@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Common.DTO;
 
-namespace BusinessLogic.Services.TicketService
+namespace BusinessLogic.Services
 {
-    interface ITicketService
+    public interface ITicketService : IService<TicketDto>
     {
     }
 }
