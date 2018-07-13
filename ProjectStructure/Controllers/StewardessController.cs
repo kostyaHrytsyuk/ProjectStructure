@@ -2,51 +2,50 @@
 using BusinessLogic.Services;
 using Common.DTO;
 
-
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
-    [Route("api/tickets")]
-    public class TicketController : Controller
+    [Route("api/stewardesses")]
+    public class StewardessController : Controller
     {
-        private ITicketService _service;
+        IStewardessService _service;
 
-        public TicketController(ITicketService service)
+        public StewardessController(IStewardessService service)
         {
             _service = service;
         }
 
-        //GET: api/tickets/
+        //GET: api/stewardesses/
         [HttpGet]
         public IActionResult GetAll()
         {
             return Json(_service.GetAll());
         }
 
-        //GET: api/tickets/:id
+        //GET: api/stewardesses/:id
         [HttpGet("{id})")]
         public IActionResult GetById(int id)
         {
             return Json(_service.Get(id));
         }
 
-        //POST: api/tickets/
+        //POST: api/stewardesses/
         [HttpPost]
-        public IActionResult Create([FromBody] TicketDto ticket)
+        public IActionResult Create([FromBody] StewardessDto stewardess)
         {
-            _service.Create(ticket);
+            _service.Create(stewardess);
             return Ok();
         }
 
-        //PUT: api/tickets/:id
+        //PUT: api/stewardesses/:id
         [HttpPut("{id})")]
-        public IActionResult Update([FromBody] TicketDto ticket)
+        public IActionResult Update([FromBody] StewardessDto stewardess)
         {
-            _service.Update(ticket);
+            _service.Update(stewardess);
             return Ok();
         }
 
-        //DELETE: api/tickets/:id
+        //DELETE: api/stewardesses/:id
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
