@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ProjectStructure.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    [Migration("20180716022651_AddedRestEntites")]
-    partial class AddedRestEntites
+    [Migration("20180716162113_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
