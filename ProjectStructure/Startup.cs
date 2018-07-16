@@ -9,6 +9,7 @@ using DAL.UnitOfWork;
 using DAL;
 using Common.DTO;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ProjectStructure
 {
@@ -24,7 +25,12 @@ namespace ProjectStructure
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
+            
 
             services.AddOptions();
 

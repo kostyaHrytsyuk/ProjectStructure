@@ -23,12 +23,16 @@ namespace DAL.Repositories
                     var planes = _context.Planes;
                     var planesWithTypes = planes.Include(p => p.PlaneType);
                     return planesWithTypes.ToList() as List<T>;
+                case "Stewardess":
+                    var stewardesses = _context.Stewardesses;
+                    var stewardessesWithCrews = stewardesses.Include(s => s.Crew).ThenInclude(c => c.Pilot);
+                    return stewardessesWithCrews.ToList() as List<T>;
                 case "Crew":
                     var crews = _context.Crews;
                     var crewsWithStaff = crews.Include(c => c.Stewardesses).Include(c => c.Pilot);
                     return crewsWithStaff.ToList() as List<T>;
                 default:
-                    return _context.SetOf<T>() as List<T>;
+                    return _context.SetOf<T>().ToList() as List<T>;
             }
         }
 

@@ -33,10 +33,11 @@ namespace DAL
                 .WithMany(pt => pt.Planes)
                 .HasForeignKey(p => p.PlaneTypeId);
 
-            modelBuilder.Entity<Pilot>().ToTable("Pilots");
+
             modelBuilder.Entity<Pilot>().HasOne<Crew>(p => p.Crew)
                 .WithOne(c => c.Pilot)
                 .HasForeignKey<Crew>(c => c.PilotId);
+            modelBuilder.Entity<Pilot>().ToTable("Pilots");
 
             modelBuilder.Entity<Stewardess>().ToTable("Stewardesses");
             modelBuilder.Entity<Stewardess>().HasOne(s => s.Crew)

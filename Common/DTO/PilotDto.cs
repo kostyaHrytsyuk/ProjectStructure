@@ -11,5 +11,7 @@ namespace Common.DTO
         public DateTime DateOfBirth { get; set; }
 
         public int Experience { get; set; }
+
+        public CrewDto Crew { get; set; }
     }
 }
