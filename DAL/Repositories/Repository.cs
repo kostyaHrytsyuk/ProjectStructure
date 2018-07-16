@@ -6,16 +6,17 @@ namespace DAL.Repositories
 {
     class Repository<T> : IRepository<T> where T : Entity
     {
-        private DataSource _context;
+        private AirportContext _context;
 
-        public Repository(DataSource context)
+        public Repository(AirportContext context)
         {
             _context = context;
         }
             
         public List<T> GetAll()
         {
-            return (List<T>)_context.SetOf<T>();
+            var items = _context.SetOf<T>().Select(item => item).ToList();
+            return items;
         }
 
         public T Get(int id)
@@ -25,13 +26,16 @@ namespace DAL.Repositories
 
         public void Create(T item)
         {
-            ((List<T>)_context.SetOf<T>()).Add(item);
+            (_context.SetOf<T>()).Add(item);
+            _context.SaveChanges();
         }
 
         public void Update(T item)
-        {            
-            var updItemIndex = _context.SetOf<T>().ToList().IndexOf(Get(item.Id));
-            ((List<T>)_context.SetOf<T>())[updItemIndex] = item;
+        {
+            var updItem = Get(item.Id);
+            _context.SetOf<T>().Remove(updItem);
+            _context.SetOf<T>().Add(item);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -39,8 +43,9 @@ namespace DAL.Repositories
             var deleteItem = Get(id);
             if (deleteItem != null)
             {
-                ((List<T>)_context.SetOf<T>()).Remove(deleteItem);
+                (_context.SetOf<T>()).Remove(deleteItem);
             }
+            _context.SaveChanges();
         }
     }
 }

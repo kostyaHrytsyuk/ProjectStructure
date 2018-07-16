@@ -7,7 +7,7 @@ namespace DAL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DataSource _context;
+        private AirportContext _context;
 
         private Dictionary<Type, object> repositories = new Dictionary<Type, object>();
 
@@ -22,8 +22,8 @@ namespace DAL.UnitOfWork
             repositories.Add(typeof(TEntity), newRepository);
             return newRepository;
         }
-        
-        public UnitOfWork(DataSource context)
+
+        public UnitOfWork(AirportContext context)
         {
             _context = context;
         }

@@ -8,6 +8,7 @@ using DAL.Models;
 using DAL.UnitOfWork;
 using DAL;
 using Common.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectStructure
 {
@@ -27,7 +28,9 @@ namespace ProjectStructure
 
             services.AddOptions();
 
-            services.AddSingleton<DataSource>();
+
+            
+            services.AddDbContext<AirportContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b => b.MigrationsAssembly("ProjectStructure")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPlaneTypeService, PlaneTypeService>();
             services.AddTransient<IPlaneService, PlaneService>();
