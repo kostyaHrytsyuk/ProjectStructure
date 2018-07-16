@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using DAL.Models;
+using System;
 
 namespace DAL.Repositories
 {
@@ -15,13 +17,21 @@ namespace DAL.Repositories
             
         public List<T> GetAll()
         {
-            var items = _context.SetOf<T>().Select(item => item).ToList();
-            return items;
+            switch (typeof(T).Name)
+            {
+                case "Plane":
+                    var planes = _context.SetOf<Plane>();
+                    var planesWithTypes = planes.Include(p => p.PlaneType);
+                    return planesWithTypes.ToList() as List<T>;
+                default:
+                    return _context.SetOf<T>() as List<T>;
+            }
         }
 
         public T Get(int id)
         {
-            return _context.SetOf<T>().Where(e => e.Id == id).FirstOrDefault();
+            var item = GetAll().Where(i => i.Id == id).FirstOrDefault();
+            return item;
         }
 
         public void Create(T item)

@@ -24,9 +24,17 @@ namespace DAL
 
         public DbSet<PlaneType> PlaneTypes { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PlaneType>().ToTable("PlaneTypes");
+            modelBuilder.Entity<Plane>().ToTable("Planes");
+            modelBuilder.Entity<Pilot>().ToTable("Pilots");
+            modelBuilder.Entity<Stewardess>().ToTable("Stewardesses");
+            modelBuilder.Entity<Crew>().ToTable("Crews");
+            modelBuilder.Entity<Ticket>().ToTable("Tickets");
+            modelBuilder.Entity<Flight>().ToTable("Flights");
+            modelBuilder.Entity<Departure>().ToTable("Departures");
+        }
 
         public AirportContext(DbContextOptions<AirportContext> options) : base(options)
         {

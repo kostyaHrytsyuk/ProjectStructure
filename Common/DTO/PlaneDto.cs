@@ -6,6 +6,8 @@ namespace Common.DTO
     {
         public string Name { get; set; }
 
+        public int PlaneTypeId { get; set; }
+
         public PlaneTypeDto PlaneType { get; set; }
 
         public DateTime ReleaseDate { get; set; }

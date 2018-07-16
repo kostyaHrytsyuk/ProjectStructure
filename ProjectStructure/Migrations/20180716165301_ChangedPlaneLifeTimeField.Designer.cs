@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ProjectStructure.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    partial class AirportContextModelSnapshot : ModelSnapshot
+    [Migration("20180716165301_ChangedPlaneLifeTimeField")]
+    partial class ChangedPlaneLifeTimeField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +109,7 @@ namespace ProjectStructure.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("PlaneTypeId");
+                    b.Property<int?>("PlaneTypeId");
 
                     b.Property<DateTime>("ReleaseDate");
 
@@ -166,8 +168,7 @@ namespace ProjectStructure.Migrations
 
                     b.Property<string>("FlightNumber");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("Price");
 
                     b.HasKey("Id");
 
@@ -197,9 +198,8 @@ namespace ProjectStructure.Migrations
             modelBuilder.Entity("DAL.Models.Plane", b =>
                 {
                     b.HasOne("DAL.Models.PlaneType", "PlaneType")
-                        .WithMany("Planes")
-                        .HasForeignKey("PlaneTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("PlaneTypeId");
                 });
 
             modelBuilder.Entity("DAL.Models.Stewardess", b =>

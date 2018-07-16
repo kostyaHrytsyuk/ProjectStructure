@@ -29,9 +29,9 @@ namespace DAL
                 {
                     context.SetOf<Plane>().AddRange
                     (
-                        new Plane() { Name = "Dream", PlaneType = context.PlaneTypes.Find(2), ReleaseDate = new DateTime(1995, 11, 4) },
-                        new Plane() { Name = "Boeing", PlaneType = context.PlaneTypes.Find(1), ReleaseDate = new DateTime(2011, 6, 15) },
-                        new Plane() { Name = "Heavy", PlaneType = context.PlaneTypes.Find(4), ReleaseDate = new DateTime(2018, 2, 6) }
+                        new Plane(new DateTime(1995, 11, 4)) { Name = "Dream", PlaneType = context.PlaneTypes.Find(2) },
+                        new Plane(new DateTime(2011, 6, 15)) { Name = "Boeing", PlaneType = context.PlaneTypes.Find(1)},
+                        new Plane(new DateTime(2018, 2, 6)) { Name = "Heavy", PlaneType = context.PlaneTypes.Find(4) }
                         //new Plane() { Name = "Dream", PlaneTypeId = 2, ReleaseDate = new DateTime(1995, 11, 4) },
                         //new Plane() { Name = "Boeing", PlaneTypeId = 1, ReleaseDate = new DateTime(2011, 6, 15) },
                         //new Plane() { Name = "Heavy", PlaneTypeId = 4, ReleaseDate = new DateTime(2018, 2, 6) }
