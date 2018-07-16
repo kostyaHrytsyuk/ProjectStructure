@@ -73,26 +73,26 @@ namespace DAL
                     context.SaveChanges();
                 }
 
-                if (!context.SetOf<Ticket>().Any())
-                {
-                    context.SetOf<Ticket>().AddRange
-                    (
-                        new Ticket() { FlightNumber = "KP5311", Price = 250 },
-                        new Ticket() { FlightNumber = "7W7017", Price = 240 },
-                        new Ticket() { FlightNumber = "KP5311", Price = 300 },
-                        new Ticket() { FlightNumber = "7W7017", Price = 270 },
-                        new Ticket() { FlightNumber = "AZ4297", Price = 280 }
-                    );
-                    context.SaveChanges();
-                }
-
                 if (!context.SetOf<Flight>().Any())
                 {
                     context.SetOf<Flight>().AddRange
                     (
-                        new Flight() {FlightNumber = "7W7017", DepartureAirport = "LWO", DepartureTime = new DateTime(2018, 7, 13, 22, 15, 0), DestinationAirport = "FCO", ArrivalTime = new DateTime(2018, 7, 13, 23, 45, 0), Tickets = new List<Ticket>() { context.Tickets.Find(2), context.Tickets.Find(5) } },
-                        new Flight() {FlightNumber = "KP5311", DepartureAirport = "KBP", DepartureTime = new DateTime(2018, 7, 15, 14, 30, 0), DestinationAirport = "EIN", ArrivalTime = new DateTime(2018, 7, 15, 17, 45, 0), Tickets = new List<Ticket>() { context.Tickets.Find(1), context.Tickets.Find(4) } },
-                        new Flight() {FlightNumber = "AZ4297", DepartureAirport = "ODS", DepartureTime = new DateTime(2018, 9, 15, 19, 45, 0), DestinationAirport = "LIS", ArrivalTime = new DateTime(2018, 9, 15, 22, 30, 0), Tickets = new List<Ticket>() { context.Tickets.Find(3) } }
+                        new Flight() {FlightNumber = "7W7017", DepartureAirport = "LWO", DepartureTime = new DateTime(2018, 7, 13, 22, 15, 0), DestinationAirport = "FCO", ArrivalTime = new DateTime(2018, 7, 13, 23, 45, 0) },
+                        new Flight() {FlightNumber = "KP5311", DepartureAirport = "KBP", DepartureTime = new DateTime(2018, 7, 15, 14, 30, 0), DestinationAirport = "EIN", ArrivalTime = new DateTime(2018, 7, 15, 17, 45, 0) },
+                        new Flight() {FlightNumber = "AZ4297", DepartureAirport = "ODS", DepartureTime = new DateTime(2018, 9, 15, 19, 45, 0), DestinationAirport = "LIS", ArrivalTime = new DateTime(2018, 9, 15, 22, 30, 0) }
+                    );
+                    context.SaveChanges();
+                }
+
+                if (!context.SetOf<Ticket>().Any())
+                {                    
+                    context.SetOf<Ticket>().AddRange
+                    (
+                        new Ticket() { Flight = context.Flights.Find(2), FlightNumber = context.Flights.Find(2).FlightNumber, Price = 250 },
+                        new Ticket() { Flight = context.Flights.Find(1), FlightNumber = context.Flights.Find(1).FlightNumber, Price = 240 },
+                        new Ticket() { Flight = context.Flights.Find(2), FlightNumber = context.Flights.Find(2).FlightNumber , Price = 300 },
+                        new Ticket() { Flight = context.Flights.Find(1), FlightNumber = context.Flights.Find(1).FlightNumber , Price = 270 },
+                        new Ticket() { Flight = context.Flights.Find(3), FlightNumber = context.Flights.Find(3).FlightNumber , Price = 280 }
                     );
                     context.SaveChanges();
                 }

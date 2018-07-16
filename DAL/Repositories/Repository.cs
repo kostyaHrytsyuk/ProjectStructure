@@ -27,10 +27,22 @@ namespace DAL.Repositories
                     var stewardesses = _context.Stewardesses;
                     var stewardessesWithCrews = stewardesses.Include(s => s.Crew).ThenInclude(c => c.Pilot);
                     return stewardessesWithCrews.ToList() as List<T>;
+                case "Pilot":
+                    var pilots = _context.Pilots;
+                    var pilotsWithCrews = pilots.Include(p => p.Crew).ThenInclude(c => c.Stewardesses);
+                    return pilotsWithCrews.ToList() as List<T>;
                 case "Crew":
                     var crews = _context.Crews;
                     var crewsWithStaff = crews.Include(c => c.Stewardesses).Include(c => c.Pilot);
                     return crewsWithStaff.ToList() as List<T>;
+                case "Ticket":
+                    var tickets = _context.Tickets;
+                    var ticketsWithFlights = tickets.Include(t => t.Flight);
+                    return ticketsWithFlights.ToList() as List<T>;
+                case "Flight":
+                    var flights = _context.Flights;
+                    var flightsWithTickets = flights.Include(f => f.Tickets);
+                    return flightsWithTickets.ToList() as List<T>;
                 default:
                     return _context.SetOf<T>().ToList() as List<T>;
             }

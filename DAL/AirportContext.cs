@@ -28,10 +28,11 @@ namespace DAL
         {
             modelBuilder.Entity<PlaneType>().ToTable("PlaneTypes");
 
-            modelBuilder.Entity<Plane>().ToTable("Planes");
             modelBuilder.Entity<Plane>().HasOne<PlaneType>(p => p.PlaneType)
                 .WithMany(pt => pt.Planes)
                 .HasForeignKey(p => p.PlaneTypeId);
+            modelBuilder.Entity<Plane>().ToTable("Planes");
+            
 
 
             modelBuilder.Entity<Pilot>().HasOne<Crew>(p => p.Crew)
@@ -45,9 +46,14 @@ namespace DAL
                 .HasForeignKey(s => s.CrewId);
 
             modelBuilder.Entity<Crew>().ToTable("Crews");
-            
+
+            modelBuilder.Entity<Ticket>().HasOne<Flight>(t => t.Flight)
+                .WithMany(f => f.Tickets)
+                .HasForeignKey(t => t.FlightId);
             modelBuilder.Entity<Ticket>().ToTable("Tickets");
+
             modelBuilder.Entity<Flight>().ToTable("Flights");
+
             modelBuilder.Entity<Departure>().ToTable("Departures");
         }
 
