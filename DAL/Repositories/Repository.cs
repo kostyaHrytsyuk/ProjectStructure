@@ -20,9 +20,13 @@ namespace DAL.Repositories
             switch (typeof(T).Name)
             {
                 case "Plane":
-                    var planes = _context.SetOf<Plane>();
+                    var planes = _context.Planes;
                     var planesWithTypes = planes.Include(p => p.PlaneType);
                     return planesWithTypes.ToList() as List<T>;
+                case "Crew":
+                    var crews = _context.Crews;
+                    var crewsWithStaff = crews.Include(c => c.Stewardesses).Include(c => c.Pilot);
+                    return crewsWithStaff.ToList() as List<T>;
                 default:
                     return _context.SetOf<T>() as List<T>;
             }

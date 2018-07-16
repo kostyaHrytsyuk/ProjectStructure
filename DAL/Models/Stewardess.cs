@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DAL.Models
 {
@@ -9,5 +10,9 @@ namespace DAL.Models
         public string Surname { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+
+        public int CrewId { get; set;}
+
+        public Crew Crew { get; set; }
     }
 }

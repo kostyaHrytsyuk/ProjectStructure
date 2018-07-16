@@ -4,8 +4,10 @@ namespace DAL.Models
 {
     public class Crew : Entity
     {
-        public virtual Pilot Pilot { get; set; }
+        public int PilotId { get; set; }
 
-        public virtual List<Stewardess> Stewardesses { get; set; }
+        public Pilot Pilot { get; set; }
+
+        public ICollection<Stewardess> Stewardesses { get; set; }
     }
 }

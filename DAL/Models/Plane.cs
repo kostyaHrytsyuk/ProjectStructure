@@ -13,8 +13,6 @@ namespace DAL.Models
 
         public string Name { get; set; }
 
-        public int PlaneTypeId { get; set; }
-
         public DateTime ReleaseDate { get; set; }
 
         [NotMapped]
@@ -25,6 +23,8 @@ namespace DAL.Models
             get { return Lifetime.Ticks; }
             set { Lifetime = TimeSpan.FromTicks(value); }
         }
+
+        public int PlaneTypeId { get; set; }
 
         public PlaneType PlaneType { get; set; }
     }

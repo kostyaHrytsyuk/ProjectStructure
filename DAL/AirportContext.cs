@@ -27,10 +27,24 @@ namespace DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PlaneType>().ToTable("PlaneTypes");
+
             modelBuilder.Entity<Plane>().ToTable("Planes");
+            modelBuilder.Entity<Plane>().HasOne<PlaneType>(p => p.PlaneType)
+                .WithMany(pt => pt.Planes)
+                .HasForeignKey(p => p.PlaneTypeId);
+
             modelBuilder.Entity<Pilot>().ToTable("Pilots");
+            modelBuilder.Entity<Pilot>().HasOne<Crew>(p => p.Crew)
+                .WithOne(c => c.Pilot)
+                .HasForeignKey<Crew>(c => c.PilotId);
+
             modelBuilder.Entity<Stewardess>().ToTable("Stewardesses");
+            modelBuilder.Entity<Stewardess>().HasOne(s => s.Crew)
+                .WithMany(c => c.Stewardesses)
+                .HasForeignKey(s => s.CrewId);
+
             modelBuilder.Entity<Crew>().ToTable("Crews");
+            
             modelBuilder.Entity<Ticket>().ToTable("Tickets");
             modelBuilder.Entity<Flight>().ToTable("Flights");
             modelBuilder.Entity<Departure>().ToTable("Departures");
