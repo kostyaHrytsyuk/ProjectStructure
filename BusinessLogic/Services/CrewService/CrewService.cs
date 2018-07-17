@@ -3,6 +3,7 @@ using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -17,33 +18,36 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<CrewDto> GetAll()
+        public async Task<List<CrewDto>> GetAll()
         {
-            var items = _unitOfWork.Repository<Crew>().GetAll();
+            var items = await _unitOfWork.Repository<Crew>().GetAll();
             return  _mapper.Map<List<Crew>, List<CrewDto>>(items);
         }
 
-        public CrewDto Get(int id)
+        public async Task<CrewDto> Get(int id)
         {
-            var item = _unitOfWork.Repository<Crew>().Get(id);
+            var item = await _unitOfWork.Repository<Crew>().Get(id);
             return  _mapper.Map<Crew, CrewDto>(item);
         }
 
-        public void Create(CrewDto item)
+        public Task Create(CrewDto item)
         {
             var newItem =  _mapper.Map<CrewDto, Crew>(item);
             _unitOfWork.Repository<Crew>().Create(newItem);
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Update(CrewDto item)
+        public Task Update(CrewDto item)
         {
             var updItem =  _mapper.Map<CrewDto, Crew>(item);
             _unitOfWork.Repository<Crew>().Update(updItem);
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             _unitOfWork.Repository<Crew>().Delete(id);
+            return _unitOfWork.SaveAsync();
         }
     }
 }

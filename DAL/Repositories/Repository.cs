@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using DAL.Models;
+using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
@@ -14,10 +15,9 @@ namespace DAL.Repositories
         {
             _context = context;
             _dataSet = _context.SetOf<T>();
-
         }
             
-        public List<T> GetAll()
+        public Task<List<T>> GetAll()
         {
             switch (typeof(T).Name)
             {
@@ -28,7 +28,7 @@ namespace DAL.Repositories
 
                     var planesWithTypes = planes.Include(p => p.PlaneType);
 
-                    return planesWithTypes.ToList() as List<T>;
+                    return planesWithTypes.ToListAsync() as Task<List<T>>;
                 #endregion
 
                 #region Stewardess
@@ -40,7 +40,7 @@ namespace DAL.Repositories
                                         .Include(s => s.Crew)
                                             .ThenInclude(c => c.Pilot);
 
-                    return stewardessesWithCrews.ToList() as List<T>;
+                    return stewardessesWithCrews.ToListAsync() as Task<List<T>>;
                 #endregion
 
                 #region Pilot
@@ -52,7 +52,7 @@ namespace DAL.Repositories
                                         .Include(p => p.Crew)
                                             .ThenInclude(c => c.Stewardesses);
 
-                    return pilotsWithCrews.ToList() as List<T>;
+                    return pilotsWithCrews.ToListAsync() as Task<List<T>>;
                 #endregion
 
                 #region Crew
@@ -64,7 +64,7 @@ namespace DAL.Repositories
                                 .Include(c => c.Stewardesses)
                                 .Include(c => c.Pilot);
 
-                    return crewsWithStaff.ToList() as List<T>;
+                    return crewsWithStaff.ToListAsync() as Task<List<T>>;
                 #endregion
 
                 #region Ticket
@@ -74,7 +74,7 @@ namespace DAL.Repositories
 
                     var ticketsWithFlights = tickets.Include(t => t.Flight);
 
-                    return ticketsWithFlights.ToList() as List<T>;
+                    return ticketsWithFlights.ToListAsync() as Task<List<T>>;
                 #endregion
 
                 #region Flight
@@ -84,7 +84,7 @@ namespace DAL.Repositories
 
                     var flightsWithTickets = flights.Include(f => f.Tickets);
 
-                    return flightsWithTickets.ToList() as List<T>;
+                    return flightsWithTickets.ToListAsync() as Task<List<T>>;
                 #endregion
 
                 #region Departure
@@ -101,36 +101,35 @@ namespace DAL.Repositories
                                 .Include(d => d.Plane)
                                     .ThenInclude(p => p.PlaneType);
 
-                    return departuresWithInfo.ToList() as List<T>;
+                    return departuresWithInfo.ToListAsync() as Task<List<T>>;
                 #endregion
 
                 default:
-                    return _dataSet.ToList() as List<T>;
+                    return _dataSet.ToListAsync() as Task<List<T>>;
             }
         }
 
-        public T Get(int id)
+        public Task<T> Get(int id)
         {
-            var item = GetAll().Where(i => i.Id == id).FirstOrDefault();
+            var item = _dataSet.FindAsync(id);
             return item;
         }
-
-        public void Create(T item)
+        
+        public Task Create(T item)
         {
-            _dataSet.Add(item);
-            _context.SaveChanges();
+            return _dataSet.AddAsync(item);
         }
 
-        public void Update(T item)
+        public async Task Update(T item)
         {
-            var updItem = Get(item.Id);
+            var updItem = await Get(item.Id);
             _dataSet.Remove(updItem);
-            _dataSet.Add(item);
+            await _dataSet.AddAsync(item);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var deleteItem = Get(id);
+            var deleteItem = await Get(id);
             if (deleteItem != null)
             {
                 _dataSet.Remove(deleteItem);

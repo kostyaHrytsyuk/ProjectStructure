@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace ProjectStructure.Controllers
 {
@@ -17,39 +18,39 @@ namespace ProjectStructure.Controllers
 
         //GET: api/crews/
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Json(_service.GetAll());
+            return Json(await _service.GetAll());
         }
 
         //GET: api/crews/:id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Json(_service.Get(id));
+            return Json(await _service.Get(id));
         }
 
         //POST: api/crews/
         [HttpPost]
-        public IActionResult Create([FromBody] CrewDto crew)
+        public async Task<IActionResult> Create([FromBody] CrewDto crew)
         {
-            _service.Create(crew);
+            await _service.Create(crew);
             return Ok();
         }
 
         //PUT: api/crews/:id
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] CrewDto crew)
+        public async Task<IActionResult> Update([FromBody] CrewDto crew)
         {
-            _service.Update(crew);
+            await _service.Update(crew);
             return Ok();
         }
 
         //DELETE: api/crews/:id
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
             return Ok();
         }
     }

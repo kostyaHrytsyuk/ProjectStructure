@@ -31,10 +31,8 @@ namespace ProjectStructure
             });
 
             
-
             services.AddOptions();
-
-
+            
             
             services.AddDbContext<AirportContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b => b.MigrationsAssembly("ProjectStructure")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -46,7 +44,6 @@ namespace ProjectStructure
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<IFlightService, FlightService>();
             services.AddTransient<IDepartureService, DepartureService>();
-
 
             var mapper = MapperConfiguration().CreateMapper();
             services.AddScoped(_ => mapper);

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common.DTO;
 
 namespace BusinessLogic.Services
 {
     public interface IService<T> where T : BaseDto
     {
-        List<T> GetAll();
-        T Get(int id);
-        void Create(T item);
-        void Update(T item);
-        void Delete(int id);
+        Task<List<T>> GetAll();
+        Task<T> Get(int id);
+        Task Create(T item);
+        Task Update(T item);
+        Task Delete(int id);
     }
 }

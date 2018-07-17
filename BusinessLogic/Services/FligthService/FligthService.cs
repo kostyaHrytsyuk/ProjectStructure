@@ -3,6 +3,7 @@ using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -17,36 +18,36 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<FlightDto> GetAll()
+        public async Task<List<FlightDto>> GetAll()
         {
-            var items = _unitOfWork.Repository<Flight>().GetAll();
-            return  _mapper.Map<List<Flight>, List<FlightDto>>(items);
+            var items = await _unitOfWork.Repository<Flight>().GetAll();
+            return _mapper.Map<List<Flight>, List<FlightDto>>(items);
         }
 
-        public FlightDto Get(int id)
+        public async Task<FlightDto> Get(int id)
         {
-            var item = _unitOfWork.Repository<Flight>().Get(id);
-            return  _mapper.Map<Flight, FlightDto>(item);
+            var item = await _unitOfWork.Repository<Flight>().Get(id);
+            return _mapper.Map<Flight, FlightDto>(item);
         }
 
-        public void Create(FlightDto item)
+        public Task Create(FlightDto item)
         {
-            var newItem =  _mapper.Map<FlightDto, Flight>(item);
+            var newItem = _mapper.Map<FlightDto, Flight>(item);
             _unitOfWork.Repository<Flight>().Create(newItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Update(FlightDto item)
+        public Task Update(FlightDto item)
         {
-            var updItem =  _mapper.Map<FlightDto, Flight>(item);
+            var updItem = _mapper.Map<FlightDto, Flight>(item);
             _unitOfWork.Repository<Flight>().Update(updItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             _unitOfWork.Repository<Flight>().Delete(id);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
     }
 }
