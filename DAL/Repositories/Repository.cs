@@ -8,10 +8,13 @@ namespace DAL.Repositories
     class Repository<T> : IRepository<T> where T : Entity
     {
         private AirportContext _context;
+        private DbSet<T> _dataSet;
 
         public Repository(AirportContext context)
         {
             _context = context;
+            _dataSet = _context.SetOf<T>();
+
         }
             
         public List<T> GetAll()
@@ -102,7 +105,7 @@ namespace DAL.Repositories
                 #endregion
 
                 default:
-                    return _context.SetOf<T>().ToList() as List<T>;
+                    return _dataSet.ToList() as List<T>;
             }
         }
 
@@ -114,15 +117,15 @@ namespace DAL.Repositories
 
         public void Create(T item)
         {
-            (_context.SetOf<T>()).Add(item);
+            _dataSet.Add(item);
             _context.SaveChanges();
         }
 
         public void Update(T item)
         {
             var updItem = Get(item.Id);
-            _context.SetOf<T>().Remove(updItem);
-            _context.SetOf<T>().Add(item);
+            _dataSet.Remove(updItem);
+            _dataSet.Add(item);
         }
 
         public void Delete(int id)
@@ -130,7 +133,7 @@ namespace DAL.Repositories
             var deleteItem = Get(id);
             if (deleteItem != null)
             {
-                (_context.SetOf<T>()).Remove(deleteItem);
+                _dataSet.Remove(deleteItem);
             }
         }
     }
