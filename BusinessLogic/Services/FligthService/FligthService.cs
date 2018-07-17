@@ -20,25 +20,25 @@ namespace BusinessLogic.Services
         public List<FlightDto> GetAll()
         {
             var items = _unitOfWork.Repository<Flight>().GetAll();
-            return this._mapper.Map<List<Flight>, List<FlightDto>>(items);
+            return  _mapper.Map<List<Flight>, List<FlightDto>>(items);
         }
 
         public FlightDto Get(int id)
         {
             var item = _unitOfWork.Repository<Flight>().Get(id);
-            return this._mapper.Map<Flight, FlightDto>(item);
+            return  _mapper.Map<Flight, FlightDto>(item);
         }
 
         public void Create(FlightDto item)
         {
-            var newItem = this._mapper.Map<FlightDto, Flight>(item);
+            var newItem =  _mapper.Map<FlightDto, Flight>(item);
             _unitOfWork.Repository<Flight>().Create(newItem);
             _unitOfWork.Save();
         }
 
         public void Update(FlightDto item)
         {
-            var updItem = this._mapper.Map<FlightDto, Flight>(item);
+            var updItem =  _mapper.Map<FlightDto, Flight>(item);
             _unitOfWork.Repository<Flight>().Update(updItem);
             _unitOfWork.Save();
         }
