@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Common.DTO
 {
@@ -12,6 +13,7 @@ namespace Common.DTO
 
         public int Experience { get; set; }
 
+        [JsonIgnore]
         public CrewDto Crew { get; set; }
     }
 }

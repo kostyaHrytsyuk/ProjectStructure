@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Common.DTO
 {
@@ -6,8 +7,9 @@ namespace Common.DTO
     {
         public string Name { get; set; }
 
+        [JsonIgnore]
         public int PlaneTypeId { get; set; }
-
+                
         public PlaneTypeDto PlaneType { get; set; }
 
         public DateTime ReleaseDate { get; set; }
