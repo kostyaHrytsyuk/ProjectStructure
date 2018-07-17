@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Common.DTO
 {
@@ -9,5 +10,9 @@ namespace Common.DTO
         public string Surname { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+
+        public int? CrewId { get; set;}
+        [JsonIgnore]
+        public CrewDto Crew { get; set; }
     }
 }

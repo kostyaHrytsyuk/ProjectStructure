@@ -20,30 +20,33 @@ namespace BusinessLogic.Services
         public List<PlaneTypeDto> GetAll()
         {
             var items = _unitOfWork.Repository<PlaneType>().GetAll();
-            return this._mapper.Map<List<PlaneType>, List<PlaneTypeDto>>(items);
+            return  _mapper.Map<List<PlaneType>, List<PlaneTypeDto>>(items);
         }
 
         public PlaneTypeDto Get(int id)
         {
             var item = _unitOfWork.Repository<PlaneType>().Get(id);
-            return this._mapper.Map<PlaneType, PlaneTypeDto>(item);
+            return  _mapper.Map<PlaneType, PlaneTypeDto>(item);
         }
 
         public void Create(PlaneTypeDto item)
         {
-            var newItem = this._mapper.Map<PlaneTypeDto, PlaneType>(item);
+            var newItem =  _mapper.Map<PlaneTypeDto, PlaneType>(item);
             _unitOfWork.Repository<PlaneType>().Create(newItem);
+            _unitOfWork.Save();
         }
 
         public void Update(PlaneTypeDto item)
         {
-            var updItem = this._mapper.Map<PlaneTypeDto, PlaneType>(item);
+            var updItem =  _mapper.Map<PlaneTypeDto, PlaneType>(item);
             _unitOfWork.Repository<PlaneType>().Update(updItem);
+            _unitOfWork.Save();
         }
 
         public void Delete(int id)
         {
             _unitOfWork.Repository<PlaneType>().Delete(id);
+            _unitOfWork.Save();
         }
 
     }

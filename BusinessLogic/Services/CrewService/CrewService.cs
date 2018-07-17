@@ -20,24 +20,24 @@ namespace BusinessLogic.Services
         public List<CrewDto> GetAll()
         {
             var items = _unitOfWork.Repository<Crew>().GetAll();
-            return this._mapper.Map<List<Crew>, List<CrewDto>>(items);
+            return  _mapper.Map<List<Crew>, List<CrewDto>>(items);
         }
 
         public CrewDto Get(int id)
         {
             var item = _unitOfWork.Repository<Crew>().Get(id);
-            return this._mapper.Map<Crew, CrewDto>(item);
+            return  _mapper.Map<Crew, CrewDto>(item);
         }
 
         public void Create(CrewDto item)
         {
-            var newItem = this._mapper.Map<CrewDto, Crew>(item);
+            var newItem =  _mapper.Map<CrewDto, Crew>(item);
             _unitOfWork.Repository<Crew>().Create(newItem);
         }
 
         public void Update(CrewDto item)
         {
-            var updItem = this._mapper.Map<CrewDto, Crew>(item);
+            var updItem =  _mapper.Map<CrewDto, Crew>(item);
             _unitOfWork.Repository<Crew>().Update(updItem);
         }
 

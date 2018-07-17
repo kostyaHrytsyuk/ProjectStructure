@@ -1,24 +1,33 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Models
 {
     public class Plane : Entity
     {
-        public Plane(int id,string name, int typeId, DateTime releaseDate)
+        public Plane(DateTime releaseDate)
         {
-            Id = id;
-            Name = name;
-            TypeId = typeId;
             ReleaseDate = releaseDate;
             Lifetime = ReleaseDate.AddYears(10) - ReleaseDate;
         }
 
         public string Name { get; set; }
 
-        public int TypeId { get; set; }
-
         public DateTime ReleaseDate { get; set; }
 
+        [NotMapped]
         public TimeSpan Lifetime { get; set; }
+        
+        public long LifeTimeTicks
+        {
+            get { return Lifetime.Ticks; }
+            set { Lifetime = TimeSpan.FromTicks(value); }
+        }
+
+        public int PlaneTypeId { get; set; }
+
+        public PlaneType PlaneType { get; set; }
+
+        public Departure Departure { get; set; }
     }
 }

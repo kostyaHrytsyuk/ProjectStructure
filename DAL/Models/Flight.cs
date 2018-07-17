@@ -15,6 +15,8 @@ namespace DAL.Models
 
         public DateTime ArrivalTime { get; set; }
 
-        public List<int> Tickets { get; set; }
+        public Departure Departure { get; set; }
+
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

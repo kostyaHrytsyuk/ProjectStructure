@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Common.DTO
 {
@@ -11,5 +12,8 @@ namespace Common.DTO
         public DateTime DateOfBirth { get; set; }
 
         public int Experience { get; set; }
+
+        [JsonIgnore]
+        public CrewDto Crew { get; set; }
     }
 }
