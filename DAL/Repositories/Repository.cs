@@ -123,7 +123,6 @@ namespace DAL.Repositories
             var updItem = Get(item.Id);
             _context.SetOf<T>().Remove(updItem);
             _context.SetOf<T>().Add(item);
-            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -133,7 +132,6 @@ namespace DAL.Repositories
             {
                 (_context.SetOf<T>()).Remove(deleteItem);
             }
-            _context.SaveChanges();
         }
     }
 }

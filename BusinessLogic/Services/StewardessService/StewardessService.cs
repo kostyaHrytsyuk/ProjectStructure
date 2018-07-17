@@ -33,17 +33,20 @@ namespace BusinessLogic.Services
         {
             var newItem = this._mapper.Map<StewardessDto, Stewardess>(item);
             _unitOfWork.Repository<Stewardess>().Create(newItem);
+            _unitOfWork.Save();
         }
 
         public void Update(StewardessDto item)
         {
             var updItem = this._mapper.Map<StewardessDto, Stewardess>(item);
             _unitOfWork.Repository<Stewardess>().Update(updItem);
+            _unitOfWork.Save();
         }
 
         public void Delete(int id)
         {
             _unitOfWork.Repository<Stewardess>().Delete(id);
+            _unitOfWork.Save();
         }
 
     }

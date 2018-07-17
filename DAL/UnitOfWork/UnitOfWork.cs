@@ -27,5 +27,10 @@ namespace DAL.UnitOfWork
         {
             _context = context;
         }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
     }
 }
