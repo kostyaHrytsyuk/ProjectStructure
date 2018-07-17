@@ -43,6 +43,10 @@ namespace DAL.Repositories
                     var flights = _context.Flights;
                     var flightsWithTickets = flights.Include(f => f.Tickets);
                     return flightsWithTickets.ToList() as List<T>;
+                case "Departure":
+                    var departures = _context.Departures;
+                    var departuresWithInfo = departures.Include(d => d.Crew).Include(d => d.Flight).Include(d => d.Plane);
+                    return departuresWithInfo.ToList() as List<T>;
                 default:
                     return _context.SetOf<T>().ToList() as List<T>;
             }

@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20180716212226_UpdatePilot.Designer.cs" />
     <Compile Remove="Migrations\20180716215813_CrewStructureTest.cs" />
     <Compile Remove="Migrations\20180716215813_CrewStructureTest.Designer.cs" />
+    <Compile Remove="Migrations\20180717001351_Final.cs" />
+    <Compile Remove="Migrations\20180717001351_Final.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

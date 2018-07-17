@@ -27,5 +27,7 @@ namespace DAL.Models
         public int PlaneTypeId { get; set; }
 
         public PlaneType PlaneType { get; set; }
+
+        public Departure Departure { get; set; }
     }
 }

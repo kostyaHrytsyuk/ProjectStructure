@@ -32,9 +32,6 @@ namespace DAL
                         new Plane(new DateTime(1995, 11, 4)) { Name = "Dream", PlaneType = context.PlaneTypes.Find(2) },
                         new Plane(new DateTime(2011, 6, 15)) { Name = "Boeing", PlaneType = context.PlaneTypes.Find(1)},
                         new Plane(new DateTime(2018, 2, 6)) { Name = "Heavy", PlaneType = context.PlaneTypes.Find(4) }
-                        //new Plane() { Name = "Dream", PlaneTypeId = 2, ReleaseDate = new DateTime(1995, 11, 4) },
-                        //new Plane() { Name = "Boeing", PlaneTypeId = 1, ReleaseDate = new DateTime(2011, 6, 15) },
-                        //new Plane() { Name = "Heavy", PlaneTypeId = 4, ReleaseDate = new DateTime(2018, 2, 6) }
                     );
                     context.SaveChanges();
                 }
@@ -101,8 +98,8 @@ namespace DAL
                 {
                     context.SetOf<Departure>().AddRange
                     (
-                        new Departure() { FlightNumber = "7W7017", DepartureDate = new DateTime(2018, 7, 13, 22, 15, 0), Crew = context.Crews.Find(1), Plane = context.Planes.Find(2) },
-                        new Departure() { FlightNumber = "AZ4297", DepartureDate = new DateTime(2018, 9, 15, 19, 45, 0), Crew = context.Crews.Find(3), Plane = context.Planes.Find(1) }
+                        new Departure() { FlightNumber = "7W7017", Flight = context.Flights.Find(1), DepartureDate = new DateTime(2018, 7, 13, 22, 15, 0), Crew = context.Crews.Find(1), Plane = context.Planes.Find(2) },
+                        new Departure() { FlightNumber = "AZ4297", Flight = context.Flights.Find(3), DepartureDate = new DateTime(2018, 9, 15, 19, 45, 0), Crew = context.Crews.Find(3), Plane = context.Planes.Find(1) }
                     );
                     context.SaveChanges();
                 }
