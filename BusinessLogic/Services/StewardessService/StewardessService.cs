@@ -26,24 +26,27 @@ namespace BusinessLogic.Services
         public StewardessDto Get(int id)
         {
             var item = _unitOfWork.Repository<Stewardess>().Get(id);
-            return this._mapper.Map<Stewardess, StewardessDto>(item);
+            return  _mapper.Map<Stewardess, StewardessDto>(item);
         }
 
         public void Create(StewardessDto item)
         {
-            var newItem = this._mapper.Map<StewardessDto, Stewardess>(item);
+            var newItem =  _mapper.Map<StewardessDto, Stewardess>(item);
             _unitOfWork.Repository<Stewardess>().Create(newItem);
+            _unitOfWork.Save();
         }
 
         public void Update(StewardessDto item)
         {
-            var updItem = this._mapper.Map<StewardessDto, Stewardess>(item);
+            var updItem =  _mapper.Map<StewardessDto, Stewardess>(item);
             _unitOfWork.Repository<Stewardess>().Update(updItem);
+            _unitOfWork.Save();
         }
 
         public void Delete(int id)
         {
             _unitOfWork.Repository<Stewardess>().Delete(id);
+            _unitOfWork.Save();
         }
 
     }

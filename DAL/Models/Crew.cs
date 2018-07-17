@@ -6,6 +6,10 @@ namespace DAL.Models
     {
         public int PilotId { get; set; }
 
-        public List<int> Stewardesses { get; set; }
+        public Pilot Pilot { get; set; }
+
+        public ICollection<Stewardess> Stewardesses { get; set; }
+
+        public Departure Departure { get; set; }
     }
 }

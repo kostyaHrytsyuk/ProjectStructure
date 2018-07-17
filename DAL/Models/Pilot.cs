@@ -11,5 +11,7 @@ namespace DAL.Models
         public DateTime DateOfBirth { get; set; }
 
         public int Experience { get; set; }
+
+        public Crew Crew { get; set; }
     }
 }

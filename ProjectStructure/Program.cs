@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore;
+﻿using DAL;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectStructure
 {
@@ -7,7 +10,25 @@ namespace ProjectStructure
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                    var context = services.GetRequiredService<AirportContext>();
+                    context.Database.Migrate();
+                    Seeds.Initialize(services);
+
+                host.Run();
+            }
+            
+            
+            
+            
+            //            BuildWebHost(args).Run();
+
+
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
