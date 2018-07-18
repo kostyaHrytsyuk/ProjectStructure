@@ -50,7 +50,7 @@ namespace DAL.Repositories
 
                     var pilotsWithCrews = pilots
                                         .Include(p => p.Crew)
-                                            .ThenInclude(c => c.Stewardesses);
+                                            .ThenInclude(c => c.Stewardess);
 
                     return pilotsWithCrews.ToListAsync() as Task<List<T>>;
                 #endregion
@@ -61,7 +61,7 @@ namespace DAL.Repositories
                     var crews = _context.Crews;
 
                     var crewsWithStaff = crews
-                                .Include(c => c.Stewardesses)
+                                .Include(c => c.Stewardess)
                                 .Include(c => c.Pilot);
 
                     return crewsWithStaff.ToListAsync() as Task<List<T>>;
@@ -95,7 +95,7 @@ namespace DAL.Repositories
                     var departuresWithInfo = departures
                                 .Include(d => d.Crew)
                                     .ThenInclude(c => c.Pilot)
-                                    .ThenInclude(c => c.Crew.Stewardesses)
+                                    .ThenInclude(c => c.Crew.Stewardess)
                                 .Include(d => d.Flight)
                                     .ThenInclude(f => f.Tickets)
                                 .Include(d => d.Plane)

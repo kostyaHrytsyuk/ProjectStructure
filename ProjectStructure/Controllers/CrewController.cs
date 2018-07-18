@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
-    [Route("api/crews")]
+    [Route("api/crews/[action]")]
     public class CrewController : Controller
     {
         private ICrewService _service;
@@ -21,6 +24,15 @@ namespace ProjectStructure.Controllers
         public async Task<IActionResult> GetAll()
         {
             return Json(await _service.GetAll());
+        }
+
+        [HttpGet]
+        
+        public async Task<IActionResult> GetFirstTen()
+        {
+            await DownloadApiCrewsByUrl("http://5b128555d50a5c0014ef1204.mockapi.io/crew");
+
+            return Json(string.Empty);
         }
 
         //GET: api/crews/:id
@@ -52,6 +64,29 @@ namespace ProjectStructure.Controllers
         {
             await _service.Delete(id);
             return Ok();
+        }
+
+        private static async Task<List<CrewOutDto>> DownloadApiCrewsByUrl(string url)
+        {
+            var crews = new List<CrewOutDto>();
+
+            using (var c = new HttpClient())
+            {
+                
+                try
+                {
+                    var stringData = await c.GetStringAsync(url);
+                    crews = JsonConvert.DeserializeObject<List<CrewOutDto>>(stringData);
+
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
+            }
+            return crews;
+
         }
     }
 }

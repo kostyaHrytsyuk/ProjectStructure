@@ -3,12 +3,12 @@ using Newtonsoft.Json;
 
 namespace Common.DTO
 {
-    public class CrewDto : BaseDto
+    public class CrewOutDto : BaseDto
     {
         [JsonIgnore]
         public int PilotId { get; set; }
                 
-        public PilotDto Pilot { get; set; }
+        public ICollection<PilotDto> Pilot { get; set; }
 
         public ICollection<StewardessDto> Stewardess { get; set; }
     }

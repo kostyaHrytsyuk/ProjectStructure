@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ProjectStructure.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    partial class AirportContextModelSnapshot : ModelSnapshot
+    [Migration("20180718143714_UpdatedPilotStewardessColumnNames")]
+    partial class UpdatedPilotStewardessColumnNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,9 +94,9 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDate");
+                    b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<int>("Exp");
+                    b.Property<int>("Experience");
 
                     b.Property<string>("FirstName");
 
@@ -149,9 +151,9 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDate");
-
                     b.Property<int?>("CrewId");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("FirstName");
 
@@ -221,7 +223,7 @@ namespace ProjectStructure.Migrations
             modelBuilder.Entity("DAL.Models.Stewardess", b =>
                 {
                     b.HasOne("DAL.Models.Crew", "Crew")
-                        .WithMany("Stewardess")
+                        .WithMany("Stewardesses")
                         .HasForeignKey("CrewId");
                 });
 

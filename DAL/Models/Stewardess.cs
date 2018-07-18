@@ -4,11 +4,11 @@ namespace DAL.Models
 {
     public class Stewardess : Entity
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
-        public string Surname { get; set; }
+        public string LastName { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public int? CrewId { get; set;}
 

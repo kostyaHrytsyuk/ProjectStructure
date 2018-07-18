@@ -45,7 +45,7 @@ namespace DAL
 
             modelBuilder.Entity<Stewardess>().ToTable("Stewardesses");
             modelBuilder.Entity<Stewardess>().HasOne(s => s.Crew)
-                .WithMany(c => c.Stewardesses)
+                .WithMany(c => c.Stewardess)
                 .HasForeignKey(s => s.CrewId);
 
             modelBuilder.Entity<Crew>().HasOne<Departure>(c => c.Departure)
