@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using Newtonsoft.Json;
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
+    //[Route("api/crews/")]
     [Route("api/crews/[action]")]
     public class CrewController : Controller
     {
@@ -27,12 +30,14 @@ namespace ProjectStructure.Controllers
         }
 
         [HttpGet]
-        
+
         public async Task<IActionResult> GetFirstTen()
         {
-            await DownloadApiCrewsByUrl("http://5b128555d50a5c0014ef1204.mockapi.io/crew");
+            var crews = await DownloadApiCrewsByUrl("http://5b128555d50a5c0014ef1204.mockapi.io/crew");
 
-            return Json(string.Empty);
+            await _service.CreateSaveOutCrews(crews);
+
+            return Json(await _service.GetAll());
         }
 
         //GET: api/crews/:id
@@ -66,9 +71,9 @@ namespace ProjectStructure.Controllers
             return Ok();
         }
 
-        private static async Task<List<CrewOutDto>> DownloadApiCrewsByUrl(string url)
+        private static async Task<List<CrewDto>> DownloadApiCrewsByUrl(string url)
         {
-            var crews = new List<CrewOutDto>();
+            var crews = new List<CrewDto>();
 
             using (var c = new HttpClient())
             {
@@ -76,17 +81,17 @@ namespace ProjectStructure.Controllers
                 try
                 {
                     var stringData = await c.GetStringAsync(url);
-                    crews = JsonConvert.DeserializeObject<List<CrewOutDto>>(stringData);
-
+                    if (!string.IsNullOrEmpty(stringData))
+                    {
+                        crews = JsonConvert.DeserializeObject<List<CrewDto>>(stringData).Take(10).ToList();
+                    }
                 }
-                catch (System.Exception)
+                catch (Exception ex)
                 {
-
-                    throw;
+                    throw ex;
                 }
             }
             return crews;
-
         }
     }
 }

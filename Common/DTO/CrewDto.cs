@@ -8,7 +8,7 @@ namespace Common.DTO
         [JsonIgnore]
         public int PilotId { get; set; }
                 
-        public PilotDto Pilot { get; set; }
+        public List<PilotDto> Pilot { get; set; }
 
         public ICollection<StewardessDto> Stewardess { get; set; }
     }
