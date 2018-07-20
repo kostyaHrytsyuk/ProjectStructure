@@ -5,9 +5,9 @@ namespace Common.DTO
 {
     public class PilotDto : BaseDto
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
-        public string Surname { get; set; }
+        public string LastName { get; set; }
 
         [JsonConverter(typeof(CustomJsonDateConverter))]
         public DateTime DateOfBirth { get; set; }

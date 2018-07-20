@@ -11,6 +11,10 @@
     <Compile Remove="Migrations\20180716215813_CrewStructureTest.Designer.cs" />
     <Compile Remove="Migrations\20180717001351_Final.cs" />
     <Compile Remove="Migrations\20180717001351_Final.Designer.cs" />
+    <Compile Remove="Migrations\20180719234226_AddedAttributesForDate.cs" />
+    <Compile Remove="Migrations\20180719234226_AddedAttributesForDate.Designer.cs" />
+    <Compile Remove="Migrations\20180720022603_AddedAttributesNames.cs" />
+    <Compile Remove="Migrations\20180720022603_AddedAttributesNames.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

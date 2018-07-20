@@ -40,10 +40,10 @@ namespace DAL
                 {
                     context.SetOf<Stewardess>().AddRange
                     (
-                        new Stewardess() { Name = "Katy", Surname = "Smith", DateOfBirth = new DateTime(1983, 10, 5) },
-                        new Stewardess() { Name = "Carol", Surname = "Hoover", DateOfBirth = new DateTime(1991, 4, 11) },
-                        new Stewardess() { Name = "Ada", Surname = "Lovelace", DateOfBirth = new DateTime(1976, 7, 13) },
-                        new Stewardess() { Name = "Beverly", Surname = "Marsh", DateOfBirth = new DateTime(2002, 2, 13) }
+                        new Stewardess() { FirstName = "Katy", LastName = "Smith", BirthDate = new DateTime(1983, 10, 5) },
+                        new Stewardess() { FirstName = "Carol", LastName = "Hoover", BirthDate = new DateTime(1991, 4, 11) },
+                        new Stewardess() { FirstName = "Ada", LastName = "Lovelace", BirthDate = new DateTime(1976, 7, 13) },
+                        new Stewardess() { FirstName = "Beverly", LastName = "Marsh", BirthDate = new DateTime(2002, 2, 13) }
                     );
                     context.SaveChanges();
                 }
@@ -52,9 +52,9 @@ namespace DAL
                 {
                     context.SetOf<Pilot>().AddRange
                     (
-                        new Pilot() { Name = "Jimmy", Surname = "Doolittle", DateOfBirth = new DateTime(1973, 9, 16), Experience = 12 },
-                        new Pilot() { Name = "Noel", Surname = "Wien", DateOfBirth = new DateTime(1982, 8, 20), Experience = 9 },
-                        new Pilot() { Name = "Robert", Surname = "Hoover", DateOfBirth = new DateTime(1980, 3, 13), Experience = 15 }
+                        new Pilot() { FirstName = "Jimmy",  LastName = "Doolittle", BirthDate = new DateTime(1973, 9, 16), Experience = 12 },
+                        new Pilot() { FirstName = "Noel",   LastName = "Wien", BirthDate = new DateTime(1982, 8, 20), Experience = 9 },
+                        new Pilot() { FirstName = "Robert", LastName = "Hoover", BirthDate = new DateTime(1980, 3, 13), Experience = 15 }
                     );
                     context.SaveChanges();
                 }
