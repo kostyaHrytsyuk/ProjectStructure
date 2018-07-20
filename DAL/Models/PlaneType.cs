@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Models
@@ -6,13 +7,13 @@ namespace DAL.Models
     [Table("PlaneTypes")]
     public class PlaneType : Entity
     {
-        [Column("PlaneModel")]
+        [Column("PlaneModel"), StringLength(15), Required]
         public string PlaneModel { get; set; }
 
-        [Column("SeatsNumber")]
+        [Column("SeatsNumber"),Range(1,1000),Required]
         public int SeatsNumber { get; set; }
 
-        [Column("Carrying")]
+        [Column("Carrying"),Range(0,200000), Required]
         public int Carrying { get; set; }
 
         public ICollection<Plane> Planes { get; set; }
