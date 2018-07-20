@@ -9,6 +9,7 @@ namespace Common.DTO
 
         public string Surname { get; set; }
 
+        [JsonConverter(typeof(CustomJsonDateConverter))]
         public DateTime DateOfBirth { get; set; }
 
         public int? CrewId { get; set;}

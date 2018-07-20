@@ -11,6 +11,7 @@ namespace Common.DTO
         public int FlightId { get; set; }
         public FlightDto Flight { get; set; }
 
+        [JsonConverter(typeof(CustomJsonDateTimeConverter))]
         public DateTime DepartureDate { get; set; }
 
         [JsonIgnore]

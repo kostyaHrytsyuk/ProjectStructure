@@ -12,6 +12,7 @@ namespace Common.DTO
                 
         public PlaneTypeDto PlaneType { get; set; }
 
+        [JsonConverter(typeof(CustomJsonDateConverter))]
         public DateTime ReleaseDate { get; set; }
 
         public TimeSpan Lifetime { get; set; }
