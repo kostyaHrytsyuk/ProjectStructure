@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20180720024904_AddedNamesAttributesForRestEntities.Designer.cs" />
     <Compile Remove="Migrations\20180720025653_Test.cs" />
     <Compile Remove="Migrations\20180720025653_Test.Designer.cs" />
+    <Compile Remove="Migrations\20180720032116_AddedRestrictionStewardesses.cs" />
+    <Compile Remove="Migrations\20180720032116_AddedRestrictionStewardesses.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
