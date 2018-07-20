@@ -15,6 +15,10 @@
     <Compile Remove="Migrations\20180719234226_AddedAttributesForDate.Designer.cs" />
     <Compile Remove="Migrations\20180720022603_AddedAttributesNames.cs" />
     <Compile Remove="Migrations\20180720022603_AddedAttributesNames.Designer.cs" />
+    <Compile Remove="Migrations\20180720024904_AddedNamesAttributesForRestEntities.cs" />
+    <Compile Remove="Migrations\20180720024904_AddedNamesAttributesForRestEntities.Designer.cs" />
+    <Compile Remove="Migrations\20180720025653_Test.cs" />
+    <Compile Remove="Migrations\20180720025653_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

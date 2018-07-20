@@ -10,7 +10,7 @@ namespace Common.DTO
         public string LastName { get; set; }
 
         [JsonConverter(typeof(CustomJsonDateConverter))]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public int Experience { get; set; }
 
