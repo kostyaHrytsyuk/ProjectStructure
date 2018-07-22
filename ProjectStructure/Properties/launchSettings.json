@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/crews/GetFirstTen",
+      "launchUrl": "api/flights",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "ProjectStructure": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/crews/GetFirstTen",
+      "launchUrl": "api/flights",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace BusinessLogic.Services
 {
@@ -18,9 +20,35 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
+        private Task<List<Flight>> LoadFlightsWithDelay()
+        {
+            var tcs = new TaskCompletionSource<List<Flight>>();
+
+            var timer = new Timer(5000) { Enabled = true };
+
+            timer.Elapsed += (async (o, e) =>
+            {
+                try
+                {
+                    var items = await _unitOfWork.Repository<Flight>().GetAll();
+                    tcs.SetResult(items);
+                }
+                catch (Exception ex)
+                {
+                    tcs.SetException(ex);
+                }
+            });
+
+            timer.Start();
+
+            tcs.Task.ContinueWith(t => timer.Dispose());
+
+            return tcs.Task;
+        }
+
         public async Task<List<FlightDto>> GetAll()
         {
-            var items = await _unitOfWork.Repository<Flight>().GetAll();
+            var items = await LoadFlightsWithDelay();
             return _mapper.Map<List<Flight>, List<FlightDto>>(items);
         }
 
