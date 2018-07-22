@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20180720032116_AddedRestrictionStewardesses.Designer.cs" />
     <Compile Remove="Migrations\20180720042129_Test.cs" />
     <Compile Remove="Migrations\20180720042129_Test.Designer.cs" />
+    <Compile Remove="Migrations\20180722195111_Test.cs" />
+    <Compile Remove="Migrations\20180722195111_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
