@@ -12,7 +12,7 @@ namespace DAL.Models
         [Column("FlightNumber"),StringLength(maximumLength: 6, MinimumLength = 6),Required]
         public string FlightNumber { get; set; }
 
-        [Column("FlightId")]
+        [Column("FlightId"), Required]
         public int FlightId { get; set; }
 
         public Flight Flight { get; set; }
