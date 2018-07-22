@@ -1,18 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Models
 {
+    [Table("Tickets")]
     public class Ticket : Entity
     {
-        [Column(TypeName = "decimal(18,2)")]
+        [Column("Price",TypeName = "decimal(18,2)"),Required]
         public decimal Price { get; set; }
 
-        public Flight Flight { get; set; }
-
+        [Column("FlightNumber"),StringLength(maximumLength: 6, MinimumLength = 6),Required]
         public string FlightNumber { get; set; }
 
+        [Column("FlightId"), Required]
         public int FlightId { get; set; }
 
-        
+        public Flight Flight { get; set; }
     }
 }

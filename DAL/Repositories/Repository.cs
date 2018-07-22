@@ -118,7 +118,6 @@ namespace DAL.Repositories
         public void Create(T item)
         {
             _dataSet.Add(item);
-            _context.SaveChanges();
         }
 
         public void Update(T item)

@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ProjectStructure.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    partial class AirportContextModelSnapshot : ModelSnapshot
+    [Migration("20180720033750_AddedRestrictions")]
+    partial class AddedRestrictions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,7 @@ namespace ProjectStructure.Migrations
                         .HasColumnName("FlightId");
 
                     b.Property<string>("FlightNumber")
-                        .IsRequired()
-                        .HasColumnName("FlightNumber")
-                        .HasMaxLength(6);
+                        .HasColumnName("FlightNumber");
 
                     b.Property<int>("PlaneId")
                         .HasColumnName("PlaneId");
@@ -83,21 +83,16 @@ namespace ProjectStructure.Migrations
                         .HasColumnName("ArrivalTime");
 
                     b.Property<string>("DepartureAirport")
-                        .IsRequired()
-                        .HasColumnName("DepartureAirport")
-                        .HasMaxLength(3);
+                        .HasColumnName("DepartureAirport");
 
                     b.Property<DateTime>("DepartureTime")
                         .HasColumnName("DepartureTime");
 
                     b.Property<string>("DestinationAirport")
-                        .IsRequired()
-                        .HasColumnName("DestinationAirport")
-                        .HasMaxLength(3);
+                        .HasColumnName("DestinationAirport");
 
                     b.Property<string>("FlightNumber")
-                        .HasColumnName("FlightNumber")
-                        .HasMaxLength(6);
+                        .HasColumnName("FlightNumber");
 
                     b.HasKey("Id");
 
@@ -117,14 +112,10 @@ namespace ProjectStructure.Migrations
                     b.Property<int>("Experience");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnName("FirstName")
-                        .HasMaxLength(15);
+                        .HasColumnName("FirstName");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnName("LastName")
-                        .HasMaxLength(15);
+                        .HasColumnName("LastName");
 
                     b.HasKey("Id");
 
@@ -167,9 +158,7 @@ namespace ProjectStructure.Migrations
                         .HasColumnName("Carrying");
 
                     b.Property<string>("PlaneModel")
-                        .IsRequired()
-                        .HasColumnName("PlaneModel")
-                        .HasMaxLength(15);
+                        .HasColumnName("PlaneModel");
 
                     b.Property<int>("SeatsNumber")
                         .HasColumnName("SeatsNumber");
@@ -193,12 +182,10 @@ namespace ProjectStructure.Migrations
                         .HasColumnName("CrewId");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnName("FirstName")
                         .HasMaxLength(15);
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnName("LastName")
                         .HasMaxLength(15);
 
@@ -219,9 +206,7 @@ namespace ProjectStructure.Migrations
                         .HasColumnName("FlightId");
 
                     b.Property<string>("FlightNumber")
-                        .IsRequired()
-                        .HasColumnName("FlightNumber")
-                        .HasMaxLength(6);
+                        .HasColumnName("FlightNumber");
 
                     b.Property<decimal>("Price")
                         .HasColumnName("Price")

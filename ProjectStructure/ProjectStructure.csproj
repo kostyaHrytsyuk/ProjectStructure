@@ -11,6 +11,18 @@
     <Compile Remove="Migrations\20180716215813_CrewStructureTest.Designer.cs" />
     <Compile Remove="Migrations\20180717001351_Final.cs" />
     <Compile Remove="Migrations\20180717001351_Final.Designer.cs" />
+    <Compile Remove="Migrations\20180719234226_AddedAttributesForDate.cs" />
+    <Compile Remove="Migrations\20180719234226_AddedAttributesForDate.Designer.cs" />
+    <Compile Remove="Migrations\20180720022603_AddedAttributesNames.cs" />
+    <Compile Remove="Migrations\20180720022603_AddedAttributesNames.Designer.cs" />
+    <Compile Remove="Migrations\20180720024904_AddedNamesAttributesForRestEntities.cs" />
+    <Compile Remove="Migrations\20180720024904_AddedNamesAttributesForRestEntities.Designer.cs" />
+    <Compile Remove="Migrations\20180720025653_Test.cs" />
+    <Compile Remove="Migrations\20180720025653_Test.Designer.cs" />
+    <Compile Remove="Migrations\20180720032116_AddedRestrictionStewardesses.cs" />
+    <Compile Remove="Migrations\20180720032116_AddedRestrictionStewardesses.Designer.cs" />
+    <Compile Remove="Migrations\20180720042129_Test.cs" />
+    <Compile Remove="Migrations\20180720042129_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +31,12 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.6.104" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 

@@ -33,16 +33,30 @@ namespace ProjectStructure.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] FlightDto flight)
         {
-            _service.Create(flight);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                _service.Create(flight);
+                return Ok(flight);
+            }
+            else
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
         }
 
         //PUT: api/flights/:id
         [HttpPut("{id}")]
         public IActionResult Update([FromBody] FlightDto flight)
         {
-            _service.Update(flight);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                _service.Update(flight);
+                return Ok(flight);
+            }
+            else
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
         }
 
         //DELETE: api/flights/:id
@@ -50,7 +64,7 @@ namespace ProjectStructure.Controllers
         public IActionResult Delete(int id)
         {
             _service.Delete(id);
-            return Ok();
+            return NoContent();
         }
     }
 }
