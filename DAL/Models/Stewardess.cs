@@ -7,11 +7,11 @@ namespace DAL.Models
     [Table("Stewardesses")]
     public class Stewardess : Entity
     {
-        [Column("FirstName"), StringLength(15),Required]        
+        [Column("FirstName"), StringLength(20),Required]        
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
         public string FirstName { get; set; }
 
-        [Column("LastName"), StringLength(15),Required]
+        [Column("LastName"), StringLength(20),Required]
         public string LastName { get; set; }
 
         [Column("BirthDate",TypeName = "date"),Required]

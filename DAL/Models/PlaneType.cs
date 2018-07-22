@@ -7,7 +7,7 @@ namespace DAL.Models
     [Table("PlaneTypes")]
     public class PlaneType : Entity
     {
-        [Column("PlaneModel"), StringLength(15), Required]
+        [Column("PlaneModel"), StringLength(25), Required]
         public string PlaneModel { get; set; }
 
         [Column("SeatsNumber"),Range(1,1000),Required]

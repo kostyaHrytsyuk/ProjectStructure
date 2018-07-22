@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace DAL.Models
 {
@@ -12,10 +14,10 @@ namespace DAL.Models
             Lifetime = ReleaseDate.AddYears(10) - ReleaseDate;
         }
 
-        [Column("Name")]
+        [Column("Name"), StringLength(50), Required]
         public string Name { get; set; }
 
-        [Column("ReleaseDate", TypeName = "date")]
+        [Column("ReleaseDate", TypeName = "date"),Required]
         public DateTime ReleaseDate { get; set; }
 
         [NotMapped]
@@ -28,7 +30,7 @@ namespace DAL.Models
             set { Lifetime = TimeSpan.FromTicks(value); }
         }
 
-        [Column("PlaneTypeId")]
+        [Column("PlaneTypeId"),Required]
         public int PlaneTypeId { get; set; }
 
         public PlaneType PlaneType { get; set; }
