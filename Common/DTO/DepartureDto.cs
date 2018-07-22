@@ -6,8 +6,7 @@ namespace Common.DTO
     public class DepartureDto : BaseDto
     {
         public string FlightNumber { get; set; }
-
-        [JsonIgnore]
+        
         public int FlightId { get; set; }
         public FlightDto Flight { get; set; }
 
