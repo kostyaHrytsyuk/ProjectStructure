@@ -5,7 +5,7 @@ namespace Common.DTO
 {
     public class CrewDto : BaseDto
     {
-        [JsonIgnore]
+        
         public int PilotId { get; set; }
                 
         public PilotDto Pilot { get; set; }
