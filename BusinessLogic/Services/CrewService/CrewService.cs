@@ -35,9 +35,9 @@ namespace BusinessLogic.Services
 
         public async Task CreateSaveOutCrews(List<CrewDto> crews)
         {
-            
 
-            Task.WaitAll(CreateOutCrews(crews),SaveOutCrews());
+
+            await Task.WhenAll(CreateOutCrews(crews), SaveOutCrews());
 
             await GetAll();
         }
