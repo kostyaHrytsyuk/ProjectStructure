@@ -36,7 +36,7 @@ namespace ProjectStructure.Controllers
             if (ModelState.IsValid)
             {
                 _service.Create(flight);
-                return Ok();
+                return Ok(flight);
             }
             else
             {
@@ -51,7 +51,7 @@ namespace ProjectStructure.Controllers
             if (ModelState.IsValid)
             {
                 _service.Update(flight);
-                return Ok();
+                return Ok(flight);
             }
             else
             {
@@ -64,7 +64,7 @@ namespace ProjectStructure.Controllers
         public IActionResult Delete(int id)
         {
             _service.Delete(id);
-            return Ok();
+            return NoContent();
         }
     }
 }

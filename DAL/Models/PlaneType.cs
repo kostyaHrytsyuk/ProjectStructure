@@ -13,7 +13,7 @@ namespace DAL.Models
         [Column("SeatsNumber"),Range(1,1000),Required]
         public int SeatsNumber { get; set; }
 
-        [Column("Carrying"),Range(0,200000), Required]
+        [Column("Carrying"),Range(100,200000), Required]
         public int Carrying { get; set; }
 
         public ICollection<Plane> Planes { get; set; }
