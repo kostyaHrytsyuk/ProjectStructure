@@ -7,7 +7,7 @@ namespace Common.Validation
     {
         public PlaneValidator()
         {
-            RuleFor(p => p.Name).NotEmpty();
+            RuleFor(p => p.Name).NotEmpty().MinimumLength(2).MaximumLength(50);
             RuleFor(p => p.PlaneTypeId).NotEmpty().GreaterThan(0);            
             RuleFor(p => p.ReleaseDate).NotEmpty();
         }
