@@ -13,9 +13,9 @@ namespace DAL.Models
         [Column("LastName"), StringLength(15), Required]
         public string LastName { get; set; }
 
-        [Column("BirthDate", TypeName = "date"),Required]
+        [Column("BirthDate", TypeName = "date"), Required]
         public DateTime BirthDate { get; set; }
-
+        [Column("Experience"), Required]
         public int Experience { get; set; }
 
         public Crew Crew { get; set; }
