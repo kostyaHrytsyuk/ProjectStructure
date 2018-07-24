@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.Services;
 using Common.DTO;
-using DAL;
 using DAL.Models;
 using DAL.Repositories;
 using DAL.UnitOfWork;
@@ -14,7 +13,7 @@ namespace Airport.Tests.UnitTests
     [TestFixture]
     public class StewardessServiceTest
     {
-        private AirportContext _context;
+
         private Mapper _mapper;
         private IRepository<Stewardess> _repository;
         private IStewardessService _service;
@@ -23,9 +22,6 @@ namespace Airport.Tests.UnitTests
         [OneTimeSetUp]
         public void Init()
         {
-            _context.Database.EnsureDeleted();
-            _context.Database.EnsureCreated();
-
             _mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
@@ -47,7 +43,7 @@ namespace Airport.Tests.UnitTests
             var fakeId = -1;
 
             var stewardess = _service.Get(fakeId);
-            var items = _service.GetAll();
+            
             Assert.AreEqual(stewardess.Id,0);
 
         }

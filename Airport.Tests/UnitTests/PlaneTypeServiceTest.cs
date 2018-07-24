@@ -1,22 +1,18 @@
 ﻿using AutoMapper;
 using BusinessLogic.Services;
 using Common.DTO;
-using DAL;
 using DAL.Models;
 using DAL.Repositories;
 using DAL.UnitOfWork;
 using FakeItEasy;
 using NUnit.Framework;
-using System;
-using System.Linq;
-
 
 namespace Airport.Tests.UnitTests
 {
     [TestFixture]
     public class PlaneTypeServiceTest
     {
-        private Mapper _mapper;
+        private IMapper _mapper;
         private IRepository<PlaneType> _repository;
         private IPlaneTypeService _service;
         private IUnitOfWork _unitOfWork;
@@ -27,6 +23,7 @@ namespace Airport.Tests.UnitTests
         {
             testPlaneType = new PlaneTypeDto()
             {
+                Id = 1,
                 PlaneModel = "Plane",
                 SeatsNumber = 200,
                 Carrying = 1000
@@ -46,30 +43,36 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Get_PlaneType_With_Fake_Id_Then_Id_Equal_Zero()
+        public void Create_PlaneType_Should_Create_Ticket_Then_Equal_Last_Ticket()
         {
-            var fakeId = -1;
+            _service.Create(testPlaneType);
 
-            var planeType = _service.Get(fakeId);
+            A.CallTo(() => _unitOfWork.Save()).MustHaveHappened(Repeated.Exactly.Once);
+        }
+        
+        [Test]
+        public void Map_PlaneType_From_Dto_To_Model_Then_Entities_Are_Equal_()
+        {
+            var planeTypeDto = _mapper.Map<PlaneTypeDto,PlaneType>(testPlaneType);
 
-            Assert.AreEqual(planeType.Id, 0);
+            Assert.AreEqual(planeTypeDto.Id, testPlaneType.Id);
+            Assert.AreEqual(planeTypeDto.PlaneModel, testPlaneType.PlaneModel);
+            Assert.AreEqual(planeTypeDto.SeatsNumber, testPlaneType.SeatsNumber);
+            Assert.AreEqual(planeTypeDto.Carrying, testPlaneType.Carrying);
         }
 
         //[Test]
-        //public void CreateTicket_Should_Create_Ticket_Then_Equal_Last_Ticket()
+        //public void Map_PlaneType_From_Model_To_Dto_Then_Entities_Are_Equal_()
         //{
-        //    _service.Create(testPlaneType);
+        //    var planeTypeModel = _mapper.Map<PlaneType, PlaneTypeDto>(testPlaneType);
 
-        //    var lastPlaneType = _service.GetAll().Last();
-
-        //    Assert.AreEqual(testPlaneType, lastPlaneType);
-
+        //    Assert.AreEqual(planeTypeModel.Id, testPlaneType.Id);
+        //    Assert.AreEqual(planeTypeModel.PlaneModel, testPlaneType.PlaneModel);
+        //    Assert.AreEqual(planeTypeModel.SeatsNumber, testPlaneType.SeatsNumber);
+        //    Assert.AreEqual(planeTypeModel.Carrying, testPlaneType.Carrying);
         //}
 
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-        }
+
 
     }
 }
