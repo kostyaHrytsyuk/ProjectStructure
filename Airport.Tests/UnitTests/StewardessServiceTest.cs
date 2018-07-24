@@ -23,6 +23,9 @@ namespace Airport.Tests.UnitTests
         [OneTimeSetUp]
         public void Init()
         {
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
+
             _mapper = new Mapper(
                 new MapperConfiguration(cfg =>
                 {
@@ -39,12 +42,12 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Get_Stewardess_WIth_Fake_Id_Then_Id_Equal_Zero()
+        public void Get_Stewardess_With_Fake_Id_Then_Id_Equal_Zero()
         {
             var fakeId = -1;
 
             var stewardess = _service.Get(fakeId);
-
+            var items = _service.GetAll();
             Assert.AreEqual(stewardess.Id,0);
 
         }

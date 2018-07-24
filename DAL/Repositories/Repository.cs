@@ -5,7 +5,7 @@ using DAL.Models;
 
 namespace DAL.Repositories
 {
-    class Repository<T> : IRepository<T> where T : Entity
+    public class Repository<T> : IRepository<T> where T : Entity
     {
         private AirportContext _context;
         private DbSet<T> _dataSet;
