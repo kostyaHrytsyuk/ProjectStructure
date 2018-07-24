@@ -9,10 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{FF6A8C58-B64A-4BD1-BCA7-D9FD729D9EBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{9FF76A75-B71B-4400-A87B-B98E54BA42AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{9FF76A75-B71B-4400-A87B-B98E54BA42AC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B54E2134-8FFC-4CF0-B37B-1E0BEDFB866F} = {B54E2134-8FFC-4CF0-B37B-1E0BEDFB866F}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airport.Tests", "Airport.Tests\Airport.Tests.csproj", "{3C4DE7F9-2110-4E84-BABE-1B33DF05C095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{9FF76A75-B71B-4400-A87B-B98E54BA42AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FF76A75-B71B-4400-A87B-B98E54BA42AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FF76A75-B71B-4400-A87B-B98E54BA42AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C4DE7F9-2110-4E84-BABE-1B33DF05C095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C4DE7F9-2110-4E84-BABE-1B33DF05C095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C4DE7F9-2110-4E84-BABE-1B33DF05C095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C4DE7F9-2110-4E84-BABE-1B33DF05C095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

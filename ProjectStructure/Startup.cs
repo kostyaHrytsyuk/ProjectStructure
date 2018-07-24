@@ -2,9 +2,9 @@
 using BusinessLogic.Services;
 using Common.DTO;
 using Common.Validation;
+using DAL;
 using DAL.Models;
 using DAL.UnitOfWork;
-using DAL;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
