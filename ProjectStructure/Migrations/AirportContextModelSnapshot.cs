@@ -94,7 +94,8 @@ namespace ProjectStructure.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
-                    b.Property<int>("Exp");
+                    b.Property<int>("Exp")
+                        .HasColumnName("Exp");
 
                     b.Property<string>("FirstName");
 
