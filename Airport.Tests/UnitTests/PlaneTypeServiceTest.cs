@@ -46,8 +46,10 @@ namespace Airport.Tests.UnitTests
         [Test]
         public void Create_PlaneType_Should_Invoke_Repository_Create_Once()
         {
+            //Act
             _service.Create(testPlaneTypeDto);
 
+            //Assert
             A.CallTo(_repository).Where(call => call.Method.Name == "Create").MustHaveHappenedOnceExactly();
             A.CallTo(() => _unitOfWork.Save()).MustHaveHappenedOnceExactly();
         }
@@ -55,8 +57,10 @@ namespace Airport.Tests.UnitTests
         [Test]
         public void Update_PlaneType_Should_Invoke_Repository_Update_Once()
         {
+            //Act
             _service.Update(testPlaneTypeDto);
 
+            //Assert
             A.CallTo(_repository).Where(call => call.Method.Name == "Update").MustHaveHappenedOnceExactly();
             A.CallTo(() => _unitOfWork.Save()).MustHaveHappenedOnceExactly();
         }
@@ -64,8 +68,10 @@ namespace Airport.Tests.UnitTests
         [Test]
         public void Map_PlaneType_From_Dto_To_Model_Then_Entities_Are_Equal_()
         {
+            //Act
             var planeType = _mapper.Map<PlaneTypeDto,PlaneType>(testPlaneTypeDto);
 
+            //Assert
             Assert.AreEqual(planeType.Id, testPlaneTypeDto.Id);
             Assert.AreEqual(planeType.PlaneModel, testPlaneTypeDto.PlaneModel);
             Assert.AreEqual(planeType.SeatsNumber, testPlaneTypeDto.SeatsNumber);
@@ -75,6 +81,7 @@ namespace Airport.Tests.UnitTests
         [Test]
         public void Map_PlaneType_From_Model_To_Dto_Then_Entities_Are_Equal_()
         {
+            //Arrange
             var testPlaneType = new PlaneType()
             {
                 Id = 2,
@@ -83,16 +90,14 @@ namespace Airport.Tests.UnitTests
                 Carrying = 2000
             };
 
-
+            //Act
             var planeTypeDto = _mapper.Map<PlaneType, PlaneTypeDto>(testPlaneType);
 
+            //Assert
             Assert.AreEqual(planeTypeDto.Id, testPlaneType.Id);
             Assert.AreEqual(planeTypeDto.PlaneModel, testPlaneType.PlaneModel);
             Assert.AreEqual(planeTypeDto.SeatsNumber, testPlaneType.SeatsNumber);
             Assert.AreEqual(planeTypeDto.Carrying, testPlaneType.Carrying);
         }
-
-
-
     }
 }
