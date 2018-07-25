@@ -114,8 +114,8 @@ namespace ProjectStructure.Migrations
                         .HasColumnName("BirthDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("Experience")
-                        .HasColumnName("Experience");
+                    b.Property<int>("Exp")
+                        .HasColumnName("Exp");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
