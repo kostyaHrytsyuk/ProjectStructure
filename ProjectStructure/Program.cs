@@ -16,9 +16,12 @@ namespace ProjectStructure
             {
                 var services = scope.ServiceProvider;
 
-                    var context = services.GetRequiredService<AirportContext>();
+                using (var context = services.GetRequiredService<AirportContext>())
+                {
                     context.Database.Migrate();
                     Seeds.Initialize(services);
+                }
+
 
                 host.Run();
             }

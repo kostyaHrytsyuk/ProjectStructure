@@ -10,7 +10,7 @@ namespace Common.Validation
             RuleFor(p => p.FirstName).NotEmpty().Matches(@"^[A-Z][a-z]*").MinimumLength(2).MaximumLength(20);
             RuleFor(p => p.LastName).NotEmpty().Matches(@"^[A-Z][a-z]*").MinimumLength(2).MaximumLength(20);
             RuleFor(p => p.BirthDate).NotEmpty();
-            RuleFor(p => p.Experience).NotEmpty().GreaterThan(0).LessThanOrEqualTo(100);
+            RuleFor(p => p.Exp).NotEmpty().GreaterThan(0).LessThanOrEqualTo(100);
         }
     }
 

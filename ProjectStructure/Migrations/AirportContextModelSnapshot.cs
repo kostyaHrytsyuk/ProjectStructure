@@ -274,7 +274,7 @@ namespace ProjectStructure.Migrations
             modelBuilder.Entity("DAL.Models.Stewardess", b =>
                 {
                     b.HasOne("DAL.Models.Crew", "Crew")
-                        .WithMany("Stewardess")
+                        .WithMany("Stewardesses")
                         .HasForeignKey("CrewId");
                 });
 

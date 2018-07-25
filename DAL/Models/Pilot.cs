@@ -16,7 +16,7 @@ namespace DAL.Models
         [Column("BirthDate", TypeName = "date"), Required]
         public DateTime BirthDate { get; set; }
         [Column("Experience"), Required]
-        public int Experience { get; set; }
+        public int Exp { get; set; }
 
         public Crew Crew { get; set; }
     }
