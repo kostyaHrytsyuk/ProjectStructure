@@ -43,13 +43,13 @@ namespace ProjectStructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPlaneTypeService, PlaneTypeService>();
             //services.AddTransient<IPlaneService, PlaneService>();
-            //services.AddTransient<IStewardessService, StewardessService>();
-            //services.AddTransient<IPilotService, PilotService>();
+            services.AddTransient<IStewardessService, StewardessService>();
+            services.AddTransient<IPilotService, PilotService>();
             //services.AddTransient<ICrewService, CrewService>();
             //services.AddTransient<ITicketService, TicketService>();
             //services.AddTransient<IFlightService, FlightService>();
             //services.AddTransient<IDepartureService, DepartureService>();
-                      
+
             var mapper = MapperConfiguration().CreateMapper();
             services.AddScoped(_ => mapper);
         }
