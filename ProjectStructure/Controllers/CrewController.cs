@@ -1,11 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
-    [Route("api/crews")]
+    //[Route("api/crews/")]
+    [Route("api/crews/[action]")]
     public class CrewController : Controller
     {
         private ICrewService _service;
@@ -17,25 +24,36 @@ namespace ProjectStructure.Controllers
 
         //GET: api/crews/
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Json(_service.GetAll());
+            return Json(await _service.GetAll());
+        }
+
+        [HttpGet]
+
+        public async Task<IActionResult> GetFirstTen()
+        {
+            var crews = await DownloadApiCrewsByUrl("http://5b128555d50a5c0014ef1204.mockapi.io/crew");
+
+            await _service.CreateSaveOutCrews(crews);
+
+            return Json(await _service.GetAll());
         }
 
         //GET: api/crews/:id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Json(_service.Get(id));
+            return Json(await _service.Get(id));
         }
 
         //POST: api/crews/
         [HttpPost]
-        public IActionResult Create([FromBody] CrewDto crew)
+        public async Task<IActionResult> Create([FromBody] CrewDto crew)
         {
             if (ModelState.IsValid)
             {
-                _service.Create(crew);
+                await _service.Create(crew);
                 return Ok();
             }
             else
@@ -46,11 +64,11 @@ namespace ProjectStructure.Controllers
 
         //PUT: api/crews/:id
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] CrewDto crew)
+        public async Task<IActionResult> Update([FromBody] CrewDto crew)
         {
             if (ModelState.IsValid)
             {
-                _service.Update(crew);
+                await _service.Update(crew);
                 return Ok();
             }
             else
@@ -61,10 +79,33 @@ namespace ProjectStructure.Controllers
 
         //DELETE: api/crews/:id
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
             return NoContent();
+        }
+
+        private static async Task<List<CrewDto>> DownloadApiCrewsByUrl(string url)
+        {
+            var crews = new List<CrewDto>();
+
+            using (var c = new HttpClient())
+            {
+                
+                try
+                {
+                    var stringData = await c.GetStringAsync(url);
+                    if (!string.IsNullOrEmpty(stringData))
+                    {
+                        crews = JsonConvert.DeserializeObject<List<CrewDto>>(stringData).Take(10).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return crews;
         }
     }
 }

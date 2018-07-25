@@ -9,6 +9,7 @@ namespace Common.DTO
 
         public int PlaneTypeId { get; set; }
                 
+        [JsonIgnore]
         public PlaneTypeDto PlaneType { get; set; }
 
         [JsonConverter(typeof(CustomJsonDateConverter))]

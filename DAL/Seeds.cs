@@ -52,9 +52,9 @@ namespace DAL
                 {
                     context.SetOf<Pilot>().AddRange
                     (
-                        new Pilot() { FirstName = "Jimmy",  LastName = "Doolittle", BirthDate = new DateTime(1973, 9, 16), Experience = 12 },
-                        new Pilot() { FirstName = "Noel",   LastName = "Wien", BirthDate = new DateTime(1982, 8, 20), Experience = 9 },
-                        new Pilot() { FirstName = "Robert", LastName = "Hoover", BirthDate = new DateTime(1980, 3, 13), Experience = 15 }
+                        new Pilot() { FirstName = "Jimmy", LastName = "Doolittle", BirthDate = new DateTime(1973, 9, 16), Exp = 12 },
+                        new Pilot() { FirstName = "Noel", LastName = "Wien", BirthDate = new DateTime(1982, 8, 20), Exp = 9 },
+                        new Pilot() { FirstName = "Robert", LastName = "Hoover", BirthDate = new DateTime(1980, 3, 13), Exp = 15 }
                     );
                     context.SaveChanges();
                 }
@@ -63,9 +63,9 @@ namespace DAL
                 {
                     context.SetOf<Crew>().AddRange
                     (
-                        new Crew() { Pilot = context.Pilots.Find(2), Stewardesses = new List<Stewardess>() { context.Stewardesses.Find(2), context.Stewardesses.Find(4) } },
-                        new Crew() { Pilot = context.Pilots.Find(3), Stewardesses = new List<Stewardess>() { context.Stewardesses.Find(3) } },
-                        new Crew() { Pilot = context.Pilots.Find(1), Stewardesses = new List<Stewardess>() { context.Stewardesses.Find(1) } }
+                        new Crew() { Pilot = context.Pilots.Find(2), Stewardess = new List<Stewardess>() { context.Stewardesses.Find(2), context.Stewardesses.Find(4) } },
+                        new Crew() { Pilot = context.Pilots.Find(3), Stewardess = new List<Stewardess>() { context.Stewardesses.Find(3) } },
+                        new Crew() { Pilot = context.Pilots.Find(1), Stewardess = new List<Stewardess>() { context.Stewardesses.Find(1) } }
                     );
                     context.SaveChanges();
                 }

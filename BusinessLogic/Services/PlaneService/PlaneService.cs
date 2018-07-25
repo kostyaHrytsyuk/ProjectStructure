@@ -3,6 +3,7 @@ using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -17,36 +18,36 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<PlaneDto> GetAll()
+        public async Task<List<PlaneDto>> GetAll()
         {
-            var items = _unitOfWork.Repository<Plane>().GetAll();
-            return  _mapper.Map<List<Plane>, List<PlaneDto>>(items);
+            var items = await _unitOfWork.Repository<Plane>().GetAll();
+            return _mapper.Map<List<Plane>, List<PlaneDto>>(items);
         }
 
-        public PlaneDto Get(int id)
+        public async Task<PlaneDto> Get(int id)
         {
-            var item = _unitOfWork.Repository<Plane>().Get(id);
-            return  _mapper.Map<Plane, PlaneDto>(item);
+            var item = await _unitOfWork.Repository<Plane>().Get(id);
+            return _mapper.Map<Plane, PlaneDto>(item);
         }
 
-        public void Create(PlaneDto item)
+        public Task Create(PlaneDto item)
         {
-            var newItem =  _mapper.Map<PlaneDto, Plane>(item);
+            var newItem = _mapper.Map<PlaneDto, Plane>(item);
             _unitOfWork.Repository<Plane>().Create(newItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Update(PlaneDto item)
+        public Task Update(PlaneDto item)
         {
-            var updItem =  _mapper.Map<PlaneDto, Plane>(item);
+            var updItem = _mapper.Map<PlaneDto, Plane>(item);
             _unitOfWork.Repository<Plane>().Update(updItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             _unitOfWork.Repository<Plane>().Delete(id);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
     }
 }

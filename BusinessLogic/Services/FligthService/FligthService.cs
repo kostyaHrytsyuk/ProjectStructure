@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Timers;
 
 namespace BusinessLogic.Services
 {
@@ -17,36 +20,62 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<FlightDto> GetAll()
+        private Task<List<Flight>> LoadFlightsWithDelay()
         {
-            var items = _unitOfWork.Repository<Flight>().GetAll();
-            return  _mapper.Map<List<Flight>, List<FlightDto>>(items);
+            var tcs = new TaskCompletionSource<List<Flight>>();
+
+            var timer = new Timer(5000) { Enabled = true };
+
+            timer.Elapsed += (async (o, e) =>
+            {
+                try
+                {
+                    var items = await _unitOfWork.Repository<Flight>().GetAll();
+                    tcs.SetResult(items);
+                }
+                catch (Exception ex)
+                {
+                    tcs.SetException(ex);
+                }
+            });
+
+            timer.Start();
+
+            tcs.Task.ContinueWith(t => timer.Dispose());
+
+            return tcs.Task;
         }
 
-        public FlightDto Get(int id)
+        public async Task<List<FlightDto>> GetAll()
         {
-            var item = _unitOfWork.Repository<Flight>().Get(id);
-            return  _mapper.Map<Flight, FlightDto>(item);
+            var items = await LoadFlightsWithDelay();
+            return _mapper.Map<List<Flight>, List<FlightDto>>(items);
         }
 
-        public void Create(FlightDto item)
+        public async Task<FlightDto> Get(int id)
         {
-            var newItem =  _mapper.Map<FlightDto, Flight>(item);
+            var item = await _unitOfWork.Repository<Flight>().Get(id);
+            return _mapper.Map<Flight, FlightDto>(item);
+        }
+
+        public Task Create(FlightDto item)
+        {
+            var newItem = _mapper.Map<FlightDto, Flight>(item);
             _unitOfWork.Repository<Flight>().Create(newItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Update(FlightDto item)
+        public Task Update(FlightDto item)
         {
-            var updItem =  _mapper.Map<FlightDto, Flight>(item);
+            var updItem = _mapper.Map<FlightDto, Flight>(item);
             _unitOfWork.Repository<Flight>().Update(updItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             _unitOfWork.Repository<Flight>().Delete(id);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
     }
 }

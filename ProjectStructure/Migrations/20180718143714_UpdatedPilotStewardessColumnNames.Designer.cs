@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ProjectStructure.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    partial class AirportContextModelSnapshot : ModelSnapshot
+    [Migration("20180718143714_UpdatedPilotStewardessColumnNames")]
+    partial class UpdatedPilotStewardessColumnNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +27,7 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PilotId")
-                        .HasColumnName("PilotId");
+                    b.Property<int>("PilotId");
 
                     b.HasKey("Id");
 
@@ -42,22 +43,15 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CrewId")
-                        .HasColumnName("CrewId");
+                    b.Property<int>("CrewId");
 
-                    b.Property<DateTime>("DepartureDate")
-                        .HasColumnName("DepartureDate");
+                    b.Property<DateTime>("DepartureDate");
 
-                    b.Property<int>("FlightId")
-                        .HasColumnName("FlightId");
+                    b.Property<int>("FlightId");
 
-                    b.Property<string>("FlightNumber")
-                        .IsRequired()
-                        .HasColumnName("FlightNumber")
-                        .HasMaxLength(6);
+                    b.Property<string>("FlightNumber");
 
-                    b.Property<int>("PlaneId")
-                        .HasColumnName("PlaneId");
+                    b.Property<int>("PlaneId");
 
                     b.HasKey("Id");
 
@@ -79,25 +73,15 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("ArrivalTime")
-                        .HasColumnName("ArrivalTime");
+                    b.Property<DateTime>("ArrivalTime");
 
-                    b.Property<string>("DepartureAirport")
-                        .IsRequired()
-                        .HasColumnName("DepartureAirport")
-                        .HasMaxLength(3);
+                    b.Property<string>("DepartureAirport");
 
-                    b.Property<DateTime>("DepartureTime")
-                        .HasColumnName("DepartureTime");
+                    b.Property<DateTime>("DepartureTime");
 
-                    b.Property<string>("DestinationAirport")
-                        .IsRequired()
-                        .HasColumnName("DestinationAirport")
-                        .HasMaxLength(3);
+                    b.Property<string>("DestinationAirport");
 
-                    b.Property<string>("FlightNumber")
-                        .HasColumnName("FlightNumber")
-                        .HasMaxLength(6);
+                    b.Property<string>("FlightNumber");
 
                     b.HasKey("Id");
 
@@ -110,22 +94,13 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnName("BirthDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<int>("Experience")
-                        .HasColumnName("Experience");
+                    b.Property<int>("Experience");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnName("FirstName")
-                        .HasMaxLength(20);
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnName("LastName")
-                        .HasMaxLength(20);
+                    b.Property<string>("LastName");
 
                     b.HasKey("Id");
 
@@ -138,20 +113,13 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("LifeTimeTicks")
-                        .HasColumnName("LifeTimeTicks");
+                    b.Property<long>("LifeTimeTicks");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnName("Name")
-                        .HasMaxLength(50);
+                    b.Property<string>("Name");
 
-                    b.Property<int>("PlaneTypeId")
-                        .HasColumnName("PlaneTypeId");
+                    b.Property<int>("PlaneTypeId");
 
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnName("ReleaseDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("ReleaseDate");
 
                     b.HasKey("Id");
 
@@ -166,16 +134,11 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Carrying")
-                        .HasColumnName("Carrying");
+                    b.Property<int>("Carrying");
 
-                    b.Property<string>("PlaneModel")
-                        .IsRequired()
-                        .HasColumnName("PlaneModel")
-                        .HasMaxLength(25);
+                    b.Property<string>("PlaneModel");
 
-                    b.Property<int>("SeatsNumber")
-                        .HasColumnName("SeatsNumber");
+                    b.Property<int>("SeatsNumber");
 
                     b.HasKey("Id");
 
@@ -188,22 +151,13 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnName("BirthDate")
-                        .HasColumnType("date");
+                    b.Property<int?>("CrewId");
 
-                    b.Property<int?>("CrewId")
-                        .HasColumnName("CrewId");
+                    b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnName("FirstName")
-                        .HasMaxLength(20);
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnName("LastName")
-                        .HasMaxLength(20);
+                    b.Property<string>("LastName");
 
                     b.HasKey("Id");
 
@@ -218,16 +172,11 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FlightId")
-                        .HasColumnName("FlightId");
+                    b.Property<int>("FlightId");
 
-                    b.Property<string>("FlightNumber")
-                        .IsRequired()
-                        .HasColumnName("FlightNumber")
-                        .HasMaxLength(6);
+                    b.Property<string>("FlightNumber");
 
                     b.Property<decimal>("Price")
-                        .HasColumnName("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -274,7 +223,7 @@ namespace ProjectStructure.Migrations
             modelBuilder.Entity("DAL.Models.Stewardess", b =>
                 {
                     b.HasOne("DAL.Models.Crew", "Crew")
-                        .WithMany("Stewardess")
+                        .WithMany("Stewardesses")
                         .HasForeignKey("CrewId");
                 });
 

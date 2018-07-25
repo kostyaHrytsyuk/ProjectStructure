@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace ProjectStructure.Controllers
 {
@@ -17,25 +18,25 @@ namespace ProjectStructure.Controllers
 
         //GET: api/departures/
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Json(_service.GetAll());
+            return Json(await _service.GetAll());
         }
 
         //GET: api/departures/:id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Json(_service.Get(id));
+            return Json(await _service.Get(id));
         }
 
         //POST: api/departures/
         [HttpPost]
-        public IActionResult Create([FromBody] DepartureDto departure)
+        public async Task<IActionResult> Create([FromBody] DepartureDto departure)
         {
             if (ModelState.IsValid)
             {
-                _service.Create(departure);
+                await _service.Create(departure);
                 return Ok();
             }
             else
@@ -46,11 +47,11 @@ namespace ProjectStructure.Controllers
 
         //PUT: api/departures/:id
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] DepartureDto departure)
+        public async Task<IActionResult> Update([FromBody] DepartureDto departure)
         {
             if (ModelState.IsValid)
             {
-                _service.Update(departure);
+                await _service.Update(departure);
                 return Ok();
             }
             else
@@ -61,9 +62,9 @@ namespace ProjectStructure.Controllers
 
         //DELETE: api/departures/:id
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
             return NoContent();
         }
     }

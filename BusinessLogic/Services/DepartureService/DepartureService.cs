@@ -3,6 +3,7 @@ using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -17,36 +18,36 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<DepartureDto> GetAll()
+        public async Task<List<DepartureDto>> GetAll()
         {
-            var items = _unitOfWork.Repository<Departure>().GetAll();
-            return  _mapper.Map<List<Departure>, List<DepartureDto>>(items);
+            var items = await _unitOfWork.Repository<Departure>().GetAll();
+            return _mapper.Map<List<Departure>, List<DepartureDto>>(items);
         }
 
-        public DepartureDto Get(int id)
+        public async Task<DepartureDto> Get(int id)
         {
-            var item = _unitOfWork.Repository<Departure>().Get(id);
-            return  _mapper.Map<Departure, DepartureDto>(item);
+            var item = await _unitOfWork.Repository<Departure>().Get(id);
+            return _mapper.Map<Departure, DepartureDto>(item);
         }
 
-        public void Create(DepartureDto item)
+        public Task Create(DepartureDto item)
         {
-            var newItem =  _mapper.Map<DepartureDto, Departure>(item);
+            var newItem = _mapper.Map<DepartureDto, Departure>(item);
             _unitOfWork.Repository<Departure>().Create(newItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Update(DepartureDto item)
+        public Task Update(DepartureDto item)
         {
-            var updItem =  _mapper.Map<DepartureDto, Departure>(item);
+            var updItem = _mapper.Map<DepartureDto, Departure>(item);
             _unitOfWork.Repository<Departure>().Update(updItem);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
             _unitOfWork.Repository<Departure>().Delete(id);
-            _unitOfWork.Save();
+            return _unitOfWork.SaveAsync();
         }
     }
 }

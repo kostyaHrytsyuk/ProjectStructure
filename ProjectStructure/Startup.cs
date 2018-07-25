@@ -92,8 +92,15 @@ namespace ProjectStructure
                 cfg.CreateMap<Pilot, PilotDto>();
                 cfg.CreateMap<PilotDto, Pilot>();
 
-                cfg.CreateMap<Crew, CrewDto>();
-                cfg.CreateMap<CrewDto, Crew>();
+                //cfg.CreateMap<Crew, CrewDto>();
+                //cfg.CreateMap<CrewDto, Crew>();
+                
+                
+                cfg.CreateMap<Crew, CrewDto>().
+                ForMember(cd => cd.Pilot, opt => opt.MapFrom(c => new List<Pilot>() { c.Pilot}  ));
+
+                cfg.CreateMap<CrewDto, Crew>().
+                ForMember(c => c.Pilot, opt => opt.MapFrom(cd => cd.Pilot.FirstOrDefault()));
 
                 cfg.CreateMap<Ticket, TicketDto>();
                 cfg.CreateMap<TicketDto, Ticket>();

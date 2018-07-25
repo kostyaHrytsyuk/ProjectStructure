@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace ProjectStructure.Controllers
 {
@@ -17,25 +18,25 @@ namespace ProjectStructure.Controllers
 
         //GET: api/tickets/
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Json(_service.GetAll());
+            return Json(await _service.GetAll());
         }
 
         //GET: api/tickets/:id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Json(_service.Get(id));
+            return Json(await _service.Get(id));
         }
 
         //POST: api/tickets/
         [HttpPost]
-        public IActionResult Create([FromBody] TicketDto ticket)
+        public async Task<IActionResult> Create([FromBody] TicketDto ticket)
         {
             if (ModelState.IsValid)
             {
-                _service.Create(ticket);
+                await _service.Create(ticket);
                 return Ok();
             }
             else
@@ -46,11 +47,11 @@ namespace ProjectStructure.Controllers
 
         //PUT: api/tickets/:id
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] TicketDto ticket)
+        public async Task<IActionResult> Update([FromBody] TicketDto ticket)
         {
             if (ModelState.IsValid)
             {
-                _service.Update(ticket);
+                await _service.Update(ticket);
                 return Ok();
             }
             else
@@ -61,9 +62,9 @@ namespace ProjectStructure.Controllers
 
         //DELETE: api/tickets/:id
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
             return NoContent();
         }
     }
