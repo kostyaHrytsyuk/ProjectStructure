@@ -66,7 +66,7 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Map_Crew_From_Dto_To_Model_Then_Entities_Are_Equal_()
+        public void Map_Crew_From_Dto_To_Model_Then_Entities_Are_Equal()
         {
             //Act
             var crew = _mapper.Map<CrewDto, Crew>(testCrewDto);
@@ -77,7 +77,7 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Map_Crew_From_Model_To_Dto_Then_Entities_Are_Equal_()
+        public void Map_Crew_From_Model_To_Dto_Then_Entities_Are_Equal()
         {
             //Arrange
             var testCrew = new Crew()

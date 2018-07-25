@@ -66,7 +66,7 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Map_PlaneType_From_Dto_To_Model_Then_Entities_Are_Equal_()
+        public void Map_PlaneType_From_Dto_To_Model_Then_Entities_Are_Equal()
         {
             //Act
             var planeType = _mapper.Map<PlaneTypeDto,PlaneType>(testPlaneTypeDto);
@@ -79,7 +79,7 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Map_PlaneType_From_Model_To_Dto_Then_Entities_Are_Equal_()
+        public void Map_PlaneType_From_Model_To_Dto_Then_Entities_Are_Equal()
         {
             //Arrange
             var testPlaneType = new PlaneType()

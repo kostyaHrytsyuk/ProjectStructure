@@ -68,7 +68,7 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Map_Pilot_From_Dto_To_Model_Then_Entities_Are_Equal_()
+        public void Map_Pilot_From_Dto_To_Model_Then_Entities_Are_Equal()
         {
             //Act
             var pilot = _mapper.Map<PilotDto, Pilot>(testPilotDto);
@@ -82,7 +82,7 @@ namespace Airport.Tests.UnitTests
         }
 
         [Test]
-        public void Map_Pilot_From_Model_To_Dto_Then_Entities_Are_Equal_()
+        public void Map_Pilot_From_Model_To_Dto_Then_Entities_Are_Equal()
         {
             //Arrange
             var testPilot = new Pilot()
