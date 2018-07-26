@@ -7,7 +7,7 @@ namespace Common.DTO
 {
     class CustomJsonDateTimeConverter : DateTimeConverterBase
     {
-        private const string Format = "dd-MM-yyyy hh-mm";
+        private const string Format = "MM-dd-yyyy hh-mm";
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
