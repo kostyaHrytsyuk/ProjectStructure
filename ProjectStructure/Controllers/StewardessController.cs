@@ -52,7 +52,7 @@ namespace ProjectStructure.Controllers
             if (ModelState.IsValid)
             {
                 await _service.Update(stewardess);
-                return Ok();
+                return Ok(stewardess);
             }
             else
             {
