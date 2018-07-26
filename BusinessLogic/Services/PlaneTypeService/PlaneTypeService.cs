@@ -30,24 +30,24 @@ namespace BusinessLogic.Services
             return _mapper.Map<PlaneType, PlaneTypeDto>(item);
         }
 
-        public Task Create(PlaneTypeDto item)
+        public async Task Create(PlaneTypeDto item)
         {
             var newItem = _mapper.Map<PlaneTypeDto, PlaneType>(item);
-            _unitOfWork.Repository<PlaneType>().Create(newItem);
-            return _unitOfWork.SaveAsync();
+            await _unitOfWork.Repository<PlaneType>().Create(newItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public Task Update(PlaneTypeDto item)
+        public async Task Update(PlaneTypeDto item)
         {
             var updItem = _mapper.Map<PlaneTypeDto, PlaneType>(item);
-            _unitOfWork.Repository<PlaneType>().Update(updItem);
-            return _unitOfWork.SaveAsync();
+            await _unitOfWork.Repository<PlaneType>().Update(updItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            _unitOfWork.Repository<PlaneType>().Delete(id);
-            return _unitOfWork.SaveAsync();
+            await _unitOfWork.Repository<PlaneType>().Delete(id);
+            await _unitOfWork.SaveAsync();
         }
 
     }

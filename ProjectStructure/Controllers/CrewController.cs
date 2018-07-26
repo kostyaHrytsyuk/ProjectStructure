@@ -30,7 +30,6 @@ namespace ProjectStructure.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> GetFirstTen()
         {
             var crews = await DownloadApiCrewsByUrl("http://5b128555d50a5c0014ef1204.mockapi.io/crew");

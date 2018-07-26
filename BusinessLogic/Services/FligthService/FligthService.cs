@@ -58,24 +58,24 @@ namespace BusinessLogic.Services
             return _mapper.Map<Flight, FlightDto>(item);
         }
 
-        public Task Create(FlightDto item)
+        public async Task Create(FlightDto item)
         {
             var newItem = _mapper.Map<FlightDto, Flight>(item);
-            _unitOfWork.Repository<Flight>().Create(newItem);
-            return _unitOfWork.SaveAsync();
+            await _unitOfWork.Repository<Flight>().Create(newItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public Task Update(FlightDto item)
+        public async Task Update(FlightDto item)
         {
             var updItem = _mapper.Map<FlightDto, Flight>(item);
-            _unitOfWork.Repository<Flight>().Update(updItem);
-            return _unitOfWork.SaveAsync();
+            await _unitOfWork.Repository<Flight>().Update(updItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            _unitOfWork.Repository<Flight>().Delete(id);
-            return _unitOfWork.SaveAsync();
+            await _unitOfWork.Repository<Flight>().Delete(id);
+            await _unitOfWork.SaveAsync();
         }
     }
 }
