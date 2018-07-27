@@ -3,6 +3,7 @@ using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -17,36 +18,36 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<PilotDto> GetAll()
+        public async Task<List<PilotDto>> GetAll()
         {
-            var items = _unitOfWork.Repository<Pilot>().GetAll();
-            return  _mapper.Map<List<Pilot>, List<PilotDto>>(items);
+            var items = await _unitOfWork.Repository<Pilot>().GetAll();
+            return _mapper.Map<List<Pilot>, List<PilotDto>>(items);
         }
 
-        public PilotDto Get(int id)
+        public async Task<PilotDto> Get(int id)
         {
-            var item = _unitOfWork.Repository<Pilot>().Get(id);
-            return  _mapper.Map<Pilot, PilotDto>(item);
+            var item = await _unitOfWork.Repository<Pilot>().Get(id);
+            return _mapper.Map<Pilot, PilotDto>(item);
         }
 
-        public void Create(PilotDto item)
+        public async Task Create(PilotDto item)
         {
-            var newItem =  _mapper.Map<PilotDto, Pilot>(item);
-            _unitOfWork.Repository<Pilot>().Create(newItem);
-            _unitOfWork.Save();
+            var newItem = _mapper.Map<PilotDto, Pilot>(item);
+            await _unitOfWork.Repository<Pilot>().Create(newItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public void Update(PilotDto item)
+        public async Task Update(PilotDto item)
         {
-            var updItem =  _mapper.Map<PilotDto, Pilot>(item);
-            _unitOfWork.Repository<Pilot>().Update(updItem);
-            _unitOfWork.Save();
+            var updItem = _mapper.Map<PilotDto, Pilot>(item);
+            await _unitOfWork.Repository<Pilot>().Update(updItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _unitOfWork.Repository<Pilot>().Delete(id);
-            _unitOfWork.Save();
+            await _unitOfWork.Repository<Pilot>().Delete(id);
+            await _unitOfWork.SaveAsync();
         }
 
     }

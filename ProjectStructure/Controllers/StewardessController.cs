@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace ProjectStructure.Controllers
 {
@@ -17,40 +18,54 @@ namespace ProjectStructure.Controllers
 
         //GET: api/stewardesses/
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Json(_service.GetAll());
+            return Json(await _service.GetAll());
         }
 
         //GET: api/stewardesses/:id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Json(_service.Get(id));
+            return Json(await _service.Get(id));
         }
 
         //POST: api/stewardesses/
         [HttpPost]
-        public IActionResult Create([FromBody] StewardessDto stewardess)
+        public async Task<IActionResult> Create([FromBody] StewardessDto stewardess)
         {
-            _service.Create(stewardess);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                await _service.Create(stewardess);
+                return Ok(stewardess);
+            }
+            else
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
         }
 
         //PUT: api/stewardesses/:id
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] StewardessDto stewardess)
+        public async Task<IActionResult> Update([FromBody] StewardessDto stewardess)
         {
-            _service.Update(stewardess);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                await _service.Update(stewardess);
+                return Ok(stewardess);
+            }
+            else
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
         }
 
         //DELETE: api/stewardesses/:id
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
-            return Ok();
+            await _service.Delete(id);
+            return NoContent();
         }
     }
 }

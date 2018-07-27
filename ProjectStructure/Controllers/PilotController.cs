@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Services;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace ProjectStructure.Controllers
 {
@@ -17,40 +18,54 @@ namespace ProjectStructure.Controllers
 
         //GET: api/pilots/
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Json(_service.GetAll());
+            return Json(await _service.GetAll());
         }
 
         //GET: api/pilots/:id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Json(_service.Get(id));
+            return Json(await _service.Get(id));
         }
 
         //POST: api/pilots/
         [HttpPost]
-        public IActionResult Create([FromBody] PilotDto pilot)
+        public async Task<IActionResult> Create([FromBody] PilotDto pilot)
         {
-            _service.Create(pilot);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                await _service.Create(pilot);
+                return Ok(pilot);
+            }
+            else
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
         }
 
         //PUT: api/pilots/:id
         [HttpPut("{id}")]
-        public IActionResult Update([FromBody] PilotDto pilot)
+        public async Task<IActionResult> Update([FromBody] PilotDto pilot)
         {
-            _service.Update(pilot);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                await _service.Update(pilot);
+                return Ok(pilot);
+            }
+            else
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
         }
 
         //DELETE: api/pilots/:id
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
-            return Ok();
+            await _service.Delete(id);
+            return NoContent();
         }
     }
 }

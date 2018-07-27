@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DAL.Repositories;
 using DAL.Models;
+using System.Threading.Tasks;
 
 namespace DAL.UnitOfWork
 {
@@ -31,6 +32,11 @@ namespace DAL.UnitOfWork
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public Task SaveAsync()
+        {
+            return _context.SaveChangesAsync();
         }
     }
 }

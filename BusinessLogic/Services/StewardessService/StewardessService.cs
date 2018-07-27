@@ -3,6 +3,7 @@ using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -17,36 +18,36 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<StewardessDto> GetAll()
+        public async Task<List<StewardessDto>> GetAll()
         {
-            var items = _unitOfWork.Repository<Stewardess>().GetAll();
-            return this._mapper.Map<List<Stewardess>, List<StewardessDto>>(items);
+            var items = await _unitOfWork.Repository<Stewardess>().GetAll();
+            return _mapper.Map<List<Stewardess>, List<StewardessDto>>(items);
         }
 
-        public StewardessDto Get(int id)
+        public async Task<StewardessDto> Get(int id)
         {
-            var item = _unitOfWork.Repository<Stewardess>().Get(id);
-            return  _mapper.Map<Stewardess, StewardessDto>(item);
+            var item = await _unitOfWork.Repository<Stewardess>().Get(id);
+            return _mapper.Map<Stewardess, StewardessDto>(item);
         }
 
-        public void Create(StewardessDto item)
+        public async Task Create(StewardessDto item)
         {
-            var newItem =  _mapper.Map<StewardessDto, Stewardess>(item);
-            _unitOfWork.Repository<Stewardess>().Create(newItem);
-            _unitOfWork.Save();
+            var newItem = _mapper.Map<StewardessDto, Stewardess>(item);
+            await _unitOfWork.Repository<Stewardess>().Create(newItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public void Update(StewardessDto item)
+        public async Task Update(StewardessDto item)
         {
-            var updItem =  _mapper.Map<StewardessDto, Stewardess>(item);
-            _unitOfWork.Repository<Stewardess>().Update(updItem);
-            _unitOfWork.Save();
+            var updItem = _mapper.Map<StewardessDto, Stewardess>(item);
+            await _unitOfWork.Repository<Stewardess>().Update(updItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _unitOfWork.Repository<Stewardess>().Delete(id);
-            _unitOfWork.Save();
+            await _unitOfWork.Repository<Stewardess>().Delete(id);
+            await _unitOfWork.SaveAsync();
         }
 
     }

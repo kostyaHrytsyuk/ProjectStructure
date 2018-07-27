@@ -3,6 +3,7 @@ using AutoMapper;
 using DAL.UnitOfWork;
 using DAL.Models;
 using Common.DTO;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -17,36 +18,36 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<TicketDto> GetAll()
+        public async Task<List<TicketDto>> GetAll()
         {
-            var items = _unitOfWork.Repository<Ticket>().GetAll();
+            var items = await _unitOfWork.Repository<Ticket>().GetAll();
             return _mapper.Map<List<Ticket>, List<TicketDto>>(items);
         }
 
-        public TicketDto Get(int id)
+        public async Task<TicketDto> Get(int id)
         {
-            var item = _unitOfWork.Repository<Ticket>().Get(id);
+            var item = await _unitOfWork.Repository<Ticket>().Get(id);
             return _mapper.Map<Ticket, TicketDto>(item);
         }
 
-        public void Create(TicketDto item)
+        public async Task Create(TicketDto item)
         {
             var newItem = _mapper.Map<TicketDto, Ticket>(item);
-            _unitOfWork.Repository<Ticket>().Create(newItem);
-            _unitOfWork.Save();
+            await _unitOfWork.Repository<Ticket>().Create(newItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public void Update(TicketDto item)
+        public async Task Update(TicketDto item)
         {
             var updItem = _mapper.Map<TicketDto, Ticket>(item);
-            _unitOfWork.Repository<Ticket>().Update(updItem);
-            _unitOfWork.Save();
+            await _unitOfWork.Repository<Ticket>().Update(updItem);
+            await _unitOfWork.SaveAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _unitOfWork.Repository<Ticket>().Delete(id);
-            _unitOfWork.Save();
+            await _unitOfWork.Repository<Ticket>().Delete(id);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ProjectStructure.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    [Migration("20180716190339_ImprovedPlaneEntityWithFK")]
-    partial class ImprovedPlaneEntityWithFK
+    [Migration("20180725102708_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,11 +27,12 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("PilotId");
+                    b.Property<int>("PilotId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PilotId");
+                    b.HasIndex("PilotId")
+                        .IsUnique();
 
                     b.ToTable("Crews");
                 });
@@ -42,19 +43,26 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CrewId");
+                    b.Property<int>("CrewId");
 
                     b.Property<DateTime>("DepartureDate");
 
+                    b.Property<int>("FlightId");
+
                     b.Property<string>("FlightNumber");
 
-                    b.Property<int?>("PlaneId");
+                    b.Property<int>("PlaneId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CrewId");
+                    b.HasIndex("CrewId")
+                        .IsUnique();
 
-                    b.HasIndex("PlaneId");
+                    b.HasIndex("FlightId")
+                        .IsUnique();
+
+                    b.HasIndex("PlaneId")
+                        .IsUnique();
 
                     b.ToTable("Departures");
                 });
@@ -86,13 +94,14 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateOfBirth");
+                    b.Property<DateTime>("BirthDate");
 
-                    b.Property<int>("Experience");
+                    b.Property<int>("Exp")
+                        .HasColumnName("Exp");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("Surname");
+                    b.Property<string>("LastName");
 
                     b.HasKey("Id");
 
@@ -143,13 +152,13 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("BirthDate");
+
                     b.Property<int?>("CrewId");
 
-                    b.Property<DateTime>("DateOfBirth");
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Surname");
+                    b.Property<string>("LastName");
 
                     b.HasKey("Id");
 
@@ -164,7 +173,7 @@ namespace ProjectStructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FlightId");
+                    b.Property<int>("FlightId");
 
                     b.Property<string>("FlightNumber");
 
@@ -181,19 +190,27 @@ namespace ProjectStructure.Migrations
             modelBuilder.Entity("DAL.Models.Crew", b =>
                 {
                     b.HasOne("DAL.Models.Pilot", "Pilot")
-                        .WithMany()
-                        .HasForeignKey("PilotId");
+                        .WithOne("Crew")
+                        .HasForeignKey("DAL.Models.Crew", "PilotId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DAL.Models.Departure", b =>
                 {
                     b.HasOne("DAL.Models.Crew", "Crew")
-                        .WithMany()
-                        .HasForeignKey("CrewId");
+                        .WithOne("Departure")
+                        .HasForeignKey("DAL.Models.Departure", "CrewId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DAL.Models.Flight", "Flight")
+                        .WithOne("Departure")
+                        .HasForeignKey("DAL.Models.Departure", "FlightId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DAL.Models.Plane", "Plane")
-                        .WithMany()
-                        .HasForeignKey("PlaneId");
+                        .WithOne("Departure")
+                        .HasForeignKey("DAL.Models.Departure", "PlaneId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DAL.Models.Plane", b =>
@@ -206,16 +223,17 @@ namespace ProjectStructure.Migrations
 
             modelBuilder.Entity("DAL.Models.Stewardess", b =>
                 {
-                    b.HasOne("DAL.Models.Crew")
-                        .WithMany("Stewardesses")
+                    b.HasOne("DAL.Models.Crew", "Crew")
+                        .WithMany("Stewardess")
                         .HasForeignKey("CrewId");
                 });
 
             modelBuilder.Entity("DAL.Models.Ticket", b =>
                 {
-                    b.HasOne("DAL.Models.Flight")
+                    b.HasOne("DAL.Models.Flight", "Flight")
                         .WithMany("Tickets")
-                        .HasForeignKey("FlightId");
+                        .HasForeignKey("FlightId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

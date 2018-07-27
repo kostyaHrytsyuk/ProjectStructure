@@ -7,11 +7,12 @@ namespace Common.DTO
     {
         public string Name { get; set; }
 
-        [JsonIgnore]
         public int PlaneTypeId { get; set; }
                 
+        [JsonIgnore]
         public PlaneTypeDto PlaneType { get; set; }
 
+        [JsonConverter(typeof(CustomJsonDateConverter))]
         public DateTime ReleaseDate { get; set; }
 
         public TimeSpan Lifetime { get; set; }
