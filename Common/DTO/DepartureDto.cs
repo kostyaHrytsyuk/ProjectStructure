@@ -13,11 +13,9 @@ namespace Common.DTO
         [JsonConverter(typeof(CustomJsonDateTimeConverter))]
         public DateTime DepartureDate { get; set; }
 
-        [JsonIgnore]
         public int CrewId { get; set; }
         public CrewDto Crew { get; set; }
 
-        [JsonIgnore]
         public int PlaneId { get; set; }
         public PlaneDto Plane { get; set; }
     }

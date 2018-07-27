@@ -37,7 +37,7 @@ namespace ProjectStructure.Controllers
             if (ModelState.IsValid)
             {
                 await _service.Create(departure);
-                return Ok();
+                return Ok(departure);
             }
             else
             {
@@ -52,7 +52,7 @@ namespace ProjectStructure.Controllers
             if (ModelState.IsValid)
             {
                 await _service.Update(departure);
-                return Ok();
+                return Ok(departure);
             }
             else
             {
