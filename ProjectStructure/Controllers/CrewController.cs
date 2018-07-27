@@ -11,8 +11,8 @@ using Newtonsoft.Json;
 namespace ProjectStructure.Controllers
 {
     [Produces("application/json")]
-    //[Route("api/crews/")]
-    [Route("api/crews/[action]")]
+    [Route("api/crews")]
+    //[Route("api/crews/[action]")]
     public class CrewController : Controller
     {
         private ICrewService _service;
@@ -29,15 +29,15 @@ namespace ProjectStructure.Controllers
             return Json(await _service.GetAll());
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetFirstTen()
-        {
-            var crews = await DownloadApiCrewsByUrl("http://5b128555d50a5c0014ef1204.mockapi.io/crew");
+        //[HttpGet]
+        //public async Task<IActionResult> GetFirstTen()
+        //{
+        //    var crews = await DownloadApiCrewsByUrl("http://5b128555d50a5c0014ef1204.mockapi.io/crew");
 
-            await _service.CreateSaveOutCrews(crews);
+        //    await _service.CreateSaveOutCrews(crews);
 
-            return Json(await _service.GetAll());
-        }
+        //    return Json(await _service.GetAll());
+        //}
 
         //GET: api/crews/:id
         [HttpGet("{id}")]
@@ -53,7 +53,7 @@ namespace ProjectStructure.Controllers
             if (ModelState.IsValid)
             {
                 await _service.Create(crew);
-                return Ok();
+                return Ok(crew);
             }
             else
             {
@@ -68,7 +68,7 @@ namespace ProjectStructure.Controllers
             if (ModelState.IsValid)
             {
                 await _service.Update(crew);
-                return Ok();
+                return Ok(crew);
             }
             else
             {
