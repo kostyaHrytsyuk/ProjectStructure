@@ -35,8 +35,8 @@ namespace ProjectStructure.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Create(ticket);
-                return Ok();
+                ticket = _service.Create(ticket);
+                return Ok(ticket);
             }
             else
             {
@@ -50,8 +50,8 @@ namespace ProjectStructure.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Update(ticket);
-                return Ok();
+                ticket = _service.Update(ticket);
+                return Ok(ticket);
             }
             else
             {

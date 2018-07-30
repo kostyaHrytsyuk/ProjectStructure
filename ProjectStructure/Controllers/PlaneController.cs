@@ -35,8 +35,8 @@ namespace ProjectStructure.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Create(plane);
-                return Ok();
+                plane = _service.Create(plane);
+                return Ok(plane);
             }
             else
             {
@@ -50,8 +50,8 @@ namespace ProjectStructure.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Update(plane);
-                return Ok();
+                plane = _service.Update(plane);
+                return Ok(plane);
             }
             else
             {
