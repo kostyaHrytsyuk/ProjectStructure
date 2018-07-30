@@ -8,7 +8,7 @@ namespace BusinessLogic.Services
         List<T> GetAll();
         T Get(int id);
         T Create(T item);
-        void Update(T item);
+        T Update(T item);
         void Delete(int id);
     }
 }

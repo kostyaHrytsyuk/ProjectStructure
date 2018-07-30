@@ -21,8 +21,7 @@ namespace Airport.Tests
         [Test]
         public void Read_When_GetAll_Executed_Then_Should_Return_Entities()
         {
-            //Arrange
-                        
+            //Arrange                        
             var planeTypes = new List<PlaneTypeDto>()
             {
                 new PlaneTypeDto() { PlaneModel = "Civil", SeatsNumber = 200, Carrying = 10000 },
@@ -30,8 +29,7 @@ namespace Airport.Tests
                 new PlaneTypeDto() { PlaneModel = "Military", SeatsNumber = 40, Carrying = 3000 },
                 new PlaneTypeDto() { PlaneModel = "Falcon", SeatsNumber = 100, Carrying = 9 }
             };
-
-
+            
             var service = A.Fake<IPlaneTypeService>();
             A.CallTo(() => service.GetAll()).Returns(planeTypes);
             var controller = new PlaneTypeController(service);
@@ -42,8 +40,9 @@ namespace Airport.Tests
             //Assert
             Assert.NotNull(jsonResult);
             Assert.AreEqual(jsonResult.Value, planeTypes);
+            A.CallTo(() => service.GetAll()).MustHaveHappenedOnceExactly();
         }
-
+        
         [Test]
         public void Read_When_Get_Executed_Then_Should_Return_Entity()
         {
@@ -68,10 +67,11 @@ namespace Airport.Tests
             //Assert
             Assert.NotNull(jsonResult);
             Assert.AreEqual(testTicketDto, ticket);
+            A.CallTo(() => ticketService.Get(A<int>._)).MustHaveHappenedOnceExactly();
         }
 
         [Test]
-        public void Post_Should_Create_New_Pilot_And_Return_Statuscode_200()
+        public void Create_Should_Create_New_Pilot_And_Return_Statuscode_200()
         {
             //Arrange
             var testPilotDto = new PilotDto()
@@ -92,10 +92,11 @@ namespace Airport.Tests
             //Assert
             Assert.NotNull(actionResult);
             Assert.AreEqual(actionResult.StatusCode, 200);
+            A.CallTo(() => pilotService.Create(testPilotDto)).MustHaveHappenedOnceExactly();
         }
 
         [Test]
-        public void Post_When_Flight_Is_Not_Valid_Then_StatusCode_400()
+        public void Create_When_Flight_Is_Not_Valid_Then_StatusCode_400()
         {
             //Arrange
             var testFlightDto = new FlightDto()
@@ -109,7 +110,7 @@ namespace Airport.Tests
             };
 
             var flightService = A.Fake<IFlightService>();
-            A.CallTo(() => flightService.Create(testFlightDto)).Throws(new ValidationException("Model is invalid"));
+            A.CallTo(() => flightService.Create(testFlightDto));
             var flightController = new FlightController(flightService);
             flightController.ViewData.ModelState.AddModelError("FlightNumber", "Flight Number Format id AA1111");
 
@@ -119,6 +120,16 @@ namespace Airport.Tests
             //Assert
             Assert.NotNull(actionResult);
             Assert.AreEqual(actionResult.StatusCode, 400);
+            A.CallTo(() => flightService.Create(testFlightDto)).MustNotHaveHappened();
+        }
+
+        public void Update_Should_Execute_Update_Service_Method_And_Return_Statuscode_200()
+        {
+            var testCrewDto = new CrewDto()
+            {
+                Id = 1,
+                PilotId = 1
+            };
         }
     }
 }

@@ -37,11 +37,12 @@ namespace BusinessLogic.Services
             return item = _mapper.Map<Flight, FlightDto>(newItem);
         }
 
-        public void Update(FlightDto item)
+        public FlightDto Update(FlightDto item)
         {
             var updItem =  _mapper.Map<FlightDto, Flight>(item);
             _unitOfWork.Repository<Flight>().Update(updItem);
             _unitOfWork.Save();
+            return item = _mapper.Map<Flight, FlightDto>(updItem);
         }
 
         public void Delete(int id)
