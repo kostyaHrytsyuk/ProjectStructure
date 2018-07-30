@@ -29,11 +29,12 @@ namespace BusinessLogic.Services
             return  _mapper.Map<Departure, DepartureDto>(item);
         }
 
-        public void Create(DepartureDto item)
+        public DepartureDto Create(DepartureDto item)
         {
             var newItem =  _mapper.Map<DepartureDto, Departure>(item);
             _unitOfWork.Repository<Departure>().Create(newItem);
             _unitOfWork.Save();
+            return item = _mapper.Map <Departure, DepartureDto> (newItem);
         }
 
         public void Update(DepartureDto item)

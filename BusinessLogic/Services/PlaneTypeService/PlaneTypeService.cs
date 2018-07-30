@@ -29,11 +29,12 @@ namespace BusinessLogic.Services
             return  _mapper.Map<PlaneType, PlaneTypeDto>(item);
         }
 
-        public void Create(PlaneTypeDto item)
+        public PlaneTypeDto Create(PlaneTypeDto item)
         {
             var newItem =  _mapper.Map<PlaneTypeDto, PlaneType>(item);
             _unitOfWork.Repository<PlaneType>().Create(newItem);
             _unitOfWork.Save();
+            return item = _mapper.Map<PlaneType,PlaneTypeDto>(newItem);
         }
 
         public void Update(PlaneTypeDto item)

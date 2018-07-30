@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using DAL.Models;
@@ -123,8 +124,20 @@ namespace DAL.Repositories
         public void Update(T item)
         {
             var updItem = Get(item.Id);
-            _dataSet.Remove(updItem);
-            _dataSet.Add(item);
+            try
+            {
+                _dataSet.Remove(updItem);
+                _dataSet.Add(item);
+            }
+            catch(NullReferenceException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public void Delete(int id)
