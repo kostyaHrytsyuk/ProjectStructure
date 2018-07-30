@@ -123,13 +123,80 @@ namespace Airport.Tests
             A.CallTo(() => flightService.Create(testFlightDto)).MustNotHaveHappened();
         }
 
+        [Test]
         public void Update_Should_Execute_Update_Service_Method_And_Return_Statuscode_200()
         {
-            var testCrewDto = new CrewDto()
+            //Arrange
+            var testCrewDtoOne = new CrewDto()
             {
                 Id = 1,
                 PilotId = 1
             };
+            var testCrewDtoTwo = new CrewDto()
+            {
+                Id = 1,
+                PilotId = 2
+            };
+            var crewService = A.Fake<ICrewService>();
+            A.CallTo(() => crewService.Update(testCrewDtoOne)).Returns(testCrewDtoTwo);
+            var crewController = new CrewController(crewService);
+
+            //Act
+            var actionResult = crewController.Update(testCrewDtoOne) as OkObjectResult;
+
+            //Assert
+            Assert.NotNull(actionResult);
+            Assert.AreEqual(actionResult.StatusCode, 200);
+            Assert.AreEqual(actionResult.Value, testCrewDtoTwo);
+            A.CallTo(() => crewService.Update(testCrewDtoOne)).MustHaveHappenedOnceExactly();
+        }
+
+        [Test]
+        public void Update_When_Flight_Is_Not_Valid_Then_StatusCode_400()
+        {
+            //Arrange
+            var testFlightDto = new FlightDto()
+            {
+                Id = 1,
+                FlightNumber = "12",
+                DepartureAirport = "AAA",
+                DepartureTime = new DateTime(2007, 07, 13, 14, 45, 0),
+                DestinationAirport = "BBB",
+                ArrivalTime = new DateTime(2007, 07, 13, 16, 15, 0)
+            };
+
+            var flightService = A.Fake<IFlightService>();
+            A.CallTo(() => flightService.Update(testFlightDto));
+            var flightController = new FlightController(flightService);
+            flightController.ViewData.ModelState.AddModelError("FlightNumber", "Flight Number Format id AA1111");
+
+            //Act
+            var actionResult = flightController.Update(testFlightDto) as ObjectResult;
+
+            //Assert
+            Assert.NotNull(actionResult);
+            Assert.AreEqual(actionResult.StatusCode, 400);
+            A.CallTo(() => flightService.Update(testFlightDto)).MustNotHaveHappened();
+        }
+
+        [Test]
+        public void Delete_Should_Return_StatusCode_204()
+        {
+            //Arrange
+            var id = 1;
+
+            var departureService = A.Fake<IDepartureService>();
+            A.CallTo(() => departureService.Delete(id));
+
+            var departureController = new DepartureController(departureService);
+
+            //Act
+            var actionResult = departureController.Delete(id) as StatusCodeResult;
+
+            //Assert
+            Assert.NotNull(actionResult);
+            Assert.AreEqual(actionResult.StatusCode, 204);
+            A.CallTo(() => departureService.Delete(id)).MustHaveHappenedOnceExactly();
         }
     }
 }
