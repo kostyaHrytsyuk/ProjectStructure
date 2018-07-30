@@ -199,6 +199,37 @@ namespace Airport.Tests
             Assert.AreEqual(id, planeTypeService.Get(id).Id);
         }
 
+        [Test]
+        public void Create_Departure_Then_Should_Contains_Entities()
+        {
+            //Arrange
+            var planeService = new PlaneService(_unitOfWork, _mapper);
+            var crewService = new CrewService(_unitOfWork, _mapper);
+            var flightService = new FlightService(_unitOfWork, _mapper);
+            var departureService = new DepartureService(_unitOfWork, _mapper);
+
+            //Act
+            var plane = planeService.GetAll().LastOrDefault();
+            var crew = crewService.GetAll().LastOrDefault();
+            var flight = flightService.GetAll().LastOrDefault();
+
+            var testDepartureDto = new DepartureDto()
+            {
+                PlaneId = plane.Id,
+                CrewId = crew.Id,
+                FlightId = flight.Id,
+                FlightNumber = flight.FlightNumber,
+                DepartureDate = DateTime.Now
+            };
+
+            testDepartureDto = departureService.Create(testDepartureDto);
+                        
+            //Assert
+            Assert.AreEqual(testDepartureDto.Flight.Id, flight.Id);
+            Assert.AreEqual(testDepartureDto.Crew.Id, crew.Id);
+            Assert.AreEqual(testDepartureDto.Flight.Id,flight.Id);
+            Assert.AreEqual(testDepartureDto.FlightNumber, flight.FlightNumber);
+        }
 
         [Test]
         public void Update_Pilot_With_Not_Exist_Id_Then_Throws_ArgumentNullException()
