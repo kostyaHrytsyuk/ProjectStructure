@@ -38,7 +38,7 @@ namespace BusinessLogic.Services
             return item = _mapper.Map<Pilot, PilotDto>(newItem);
         }
 
-        public async Task Update(PilotDto item)
+        public async Task<PilotDto> Update(PilotDto item)
         {
             var updItem = _mapper.Map<PilotDto, Pilot>(item);
             await _unitOfWork.Repository<Pilot>().Update(updItem);
