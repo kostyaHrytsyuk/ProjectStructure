@@ -129,7 +129,7 @@ namespace DAL.Repositories
                 _dataSet.Remove(updItem);
                 _dataSet.Add(item);
             }
-            catch(NullReferenceException)
+            catch (ArgumentNullException)
             {
                 throw;
             }
@@ -146,6 +146,10 @@ namespace DAL.Repositories
             if (deleteItem != null)
             {
                 _dataSet.Remove(deleteItem);
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
     }
