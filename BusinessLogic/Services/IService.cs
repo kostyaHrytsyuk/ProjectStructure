@@ -8,8 +8,8 @@ namespace BusinessLogic.Services
     {
         Task<List<T>> GetAll();
         Task<T> Get(int id);
-        Task Create(T item);
-        Task Update(T item);
+        Task<T> Create(T item);
+        Task<T> Update(T item);
         Task Delete(int id);
     }
 }

@@ -30,18 +30,20 @@ namespace BusinessLogic.Services
             return _mapper.Map<Ticket, TicketDto>(item);
         }
 
-        public async Task Create(TicketDto item)
+        public async Task<TicketDto> Create(TicketDto item)
         {
             var newItem = _mapper.Map<TicketDto, Ticket>(item);
             await _unitOfWork.Repository<Ticket>().Create(newItem);
             await _unitOfWork.SaveAsync();
+            return item = _mapper.Map<Ticket, TicketDto>(newItem);
         }
 
-        public async Task Update(TicketDto item)
+        public async Task<TicketDto> Update(TicketDto item)
         {
             var updItem = _mapper.Map<TicketDto, Ticket>(item);
             await _unitOfWork.Repository<Ticket>().Update(updItem);
             await _unitOfWork.SaveAsync();
+            return item = _mapper.Map<Ticket, TicketDto>(updItem);
         }
 
         public async Task Delete(int id)
