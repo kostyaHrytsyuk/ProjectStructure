@@ -91,5 +91,38 @@ namespace Airport.Tests
             //Assert
             Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
         }
+
+        [Test]
+        public async Task Update_Crew_With_Unvalid_Data_Should_Return_Statuscode_400()
+        {
+            //Arrange
+            var testCrewDto = new CrewDto() { Id = 1, PilotId = -1};
+            var serializedCrew = JsonConvert.SerializeObject(testCrewDto);
+            var httpContent = new StringContent(serializedCrew, Encoding.UTF8, "application/json");
+                        
+            //Act
+            var response = await _client.PutAsync($"api/crews/{testCrewDto.Id}", httpContent);
+
+            //Asssert
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+        }
+
+        [Test]
+        public async Task Delete_Departure_Then_Shoud_Return_StatusCode_204()
+        {
+            //Arrange
+            var responseGetAll = await _client.GetAsync("/api/departures");
+            responseGetAll.EnsureSuccessStatusCode();
+
+            var data = await responseGetAll.Content.ReadAsStringAsync();
+            var testDepartureDto = JsonConvert.DeserializeObject<List<DepartureDto>>(data).FirstOrDefault();
+            
+            //Act
+            var response = await _client.DeleteAsync($"api/crews/{testDepartureDto.Id}");
+
+            //Assert
+            response.EnsureSuccessStatusCode();
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.NoContent);
+        }
     }
 }
