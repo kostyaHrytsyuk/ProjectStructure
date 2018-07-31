@@ -39,7 +39,7 @@ namespace ProjectStructure
             
             services.AddOptions();
                         
-            services.AddDbContext<AirportContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b => b.MigrationsAssembly("ProjectStructure")));
+            services.AddDbContext<AirportContext>(options => options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Initial Catalog=NewAirport;Integrated Security=False;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", b => b.MigrationsAssembly("ProjectStructure")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPlaneTypeService, PlaneTypeService>();
             services.AddTransient<IPlaneService, PlaneService>();
