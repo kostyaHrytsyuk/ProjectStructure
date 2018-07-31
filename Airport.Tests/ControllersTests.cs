@@ -1,16 +1,11 @@
-﻿using AutoMapper;
-using BusinessLogic.Services;
+﻿using BusinessLogic.Services;
 using Common.DTO;
-using DAL;
-using DAL.Models;
-using DAL.UnitOfWork;
-using FluentValidation;
 using FakeItEasy;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using ProjectStructure.Controllers;
 using System;
-using System.Linq;
+using System.Net;
 using System.Collections.Generic;
 
 namespace Airport.Tests
@@ -91,7 +86,7 @@ namespace Airport.Tests
 
             //Assert
             Assert.NotNull(actionResult);
-            Assert.AreEqual(actionResult.StatusCode, 200);
+            Assert.AreEqual(actionResult.StatusCode, (int)HttpStatusCode.OK);
             A.CallTo(() => pilotService.Create(testPilotDto)).MustHaveHappenedOnceExactly();
         }
 
@@ -119,7 +114,7 @@ namespace Airport.Tests
 
             //Assert
             Assert.NotNull(actionResult);
-            Assert.AreEqual(actionResult.StatusCode, 400);
+            Assert.AreEqual(actionResult.StatusCode, (int)HttpStatusCode.BadRequest);
             A.CallTo(() => flightService.Create(testFlightDto)).MustNotHaveHappened();
         }
 
@@ -146,7 +141,7 @@ namespace Airport.Tests
 
             //Assert
             Assert.NotNull(actionResult);
-            Assert.AreEqual(actionResult.StatusCode, 200);
+            Assert.AreEqual(actionResult.StatusCode, (int) HttpStatusCode.OK);
             Assert.AreEqual(actionResult.Value, testCrewDtoTwo);
             A.CallTo(() => crewService.Update(testCrewDtoOne)).MustHaveHappenedOnceExactly();
         }
@@ -175,7 +170,7 @@ namespace Airport.Tests
 
             //Assert
             Assert.NotNull(actionResult);
-            Assert.AreEqual(actionResult.StatusCode, 400);
+            Assert.AreEqual(actionResult.StatusCode, (int)HttpStatusCode.BadRequest);
             A.CallTo(() => flightService.Update(testFlightDto)).MustNotHaveHappened();
         }
 
@@ -195,7 +190,7 @@ namespace Airport.Tests
 
             //Assert
             Assert.NotNull(actionResult);
-            Assert.AreEqual(actionResult.StatusCode, 204);
+            Assert.AreEqual(actionResult.StatusCode, (int)HttpStatusCode.NoContent);
             A.CallTo(() => departureService.Delete(id)).MustHaveHappenedOnceExactly();
         }
     }
